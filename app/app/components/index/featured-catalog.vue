@@ -2,10 +2,16 @@
     <div class="w-[45%] rounded-2xl flex flex-col bg-[#FFCCA7] h-full rounded-2xl border-2 border-[#FF9D00] p-[1%]">
         <div class="flex flex-row h-[20%] items-center justify-between">
             <h2 class="forum text-2xl"> Interested in these?</h2>
-            <button class="forum text-2xl bg-[#FAE6DA] border-2 border-[#ffcbab] px-[5%] 
-            rounded-2xl transition-all duration-300 ease-in-out hover:bg-[#ffdac9] hover:-translate-y-[2%] active:translate-y-[2%] h-full">
+            <button @click="async () => {await navigateTo('/catalog')}"
+            class="forum text-2xl bg-[#FAE6DA] border-[#FF9D00] border-2  px-[5%] 
+            rounded-2xl transition-all duration-300 ease-in-out hover:bg-[#ffdac9] hover:-translate-y-[2%] active:translate-y-[2%] h-[90%]">
                     View Catalog </button>
-                    
+
+        </div>
+        <div class="flex flex-row overflow-x-scroll scrollbar-none h-[80%] rounded-2xl scroll-container">
+            <div class="h-full bg-slate-200 border border-slate-300 min-w-[30%] p-[2%]" v-for="i in [0, 1, 2, 3, 4, 5, 6, 7]">
+                sample book cover change this to an img tag when its time
+            </div>
         </div>
     </div>
 </template>
@@ -15,5 +21,15 @@
 </script>
 
 <style scoped>
+.scroll-container {
+    &::-webkit-scrollbar {
+        display: none;
+    }
+    scrollbar-width: none;
+    -ms-overflow-style: none; 
+}
 
+.this-class-does-nothing { /* this class is so that the closing style tag does not show up as yellow :) */
+    text-align: left
+}
 </style>
