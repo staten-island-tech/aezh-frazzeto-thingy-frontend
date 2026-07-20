@@ -3,7 +3,7 @@
         <div class="flex flex-row h-[20%] items-center justify-between">
             <h2 class="forum text-2xl"> Interested in these?</h2>
             <button @click="async () => {await navigateTo('/catalog')}"
-            class="border-2 border-[#ffcbab] forum text-2xl bg-[#FAE6DA] border-2 border-[#ffcbab] px-[5%] 
+            class="forum text-2xl bg-[#FAE6DA] border-[#FF9D00] border-2  px-[5%] 
             rounded-2xl transition-all duration-300 ease-in-out hover:bg-[#ffdac9] hover:-translate-y-[2%] active:translate-y-[2%] h-[90%]">
                     View Catalog </button>
 
