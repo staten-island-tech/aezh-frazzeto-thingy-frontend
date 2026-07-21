@@ -9,7 +9,7 @@
                     <input type="password"
                         class="border-2 border-[#ffcbab] w-full rounded-xl px-4 py-3 elms-sans focus:outline-none focus:border-[#FF9A5A] text-left text-lg forum bg-[#FFE1A8] placeholder-[#a9895f] transition-colors"
                         placeholder="Password" v-model="password">
-                    <div class="bg-red-400 rounded-full border-2 border-red-500 px-[3%] h-[15%] forum font-bold w-full mt-[1%]"
+                    <div class="bg-red-400 rounded-full border-2 border-red-500 px-[3%] lg:h-[25%] h-[15%] forum font-bold w-full mt-[1%]"
                         v-if="errorMessage">
                         Error: {{ errorMessage }}
                     </div>
