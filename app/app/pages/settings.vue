@@ -16,12 +16,19 @@
 
         <div class="bg-[#FFE9CC] rounded-3xl border-2 border-[#ffcbab] shadow-sm p-8 flex flex-col items-center gap-6">
             <h2 class="text-3xl forum font-bold"> Other </h2>
+            <div class="w-full" v-if="studentType === 'Admin'">
+
+            </div>
+            <div class="w-full forum text-lg italic" v-else> <!--  -->
+                You have no other settings options at this time.
+            </div>
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
 const loggedIn = ref<boolean>(true) // CONVERT THIS INTO BACKEND STUFF
+const studentType = ref<("Admin" | "Student")>("Student")
 </script>
 
 <style scoped></style>
