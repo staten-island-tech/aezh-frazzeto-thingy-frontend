@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-[#FEDBB3] h-screen p-[1%] flex flex-col gap-6">
+    <div class="bg-[#FEDBB3] h-screen p-[1%] flex flex-col gap-6 text-black">
         <h2 class="text-[3rem] forum"> Settings </h2>
         <div class="bg-[#FFE9CC] rounded-3xl border-2 border-[#ffcbab] shadow-sm p-8 flex flex-col items-center gap-6">
             <h2 class="text-3xl forum font-bold text-center"> Account Settings </h2>

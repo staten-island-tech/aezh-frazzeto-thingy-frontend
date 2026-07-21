@@ -8,7 +8,7 @@
 
 <script lang="ts" setup>
 
-const books:book[] = [{
+const books:Book[] = [{
     name: "Harry Potter and the Sorcerer's Stone",
     author: "JK Roling",
     rating: 3,
