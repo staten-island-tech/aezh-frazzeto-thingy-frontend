@@ -8,8 +8,10 @@
                     View Catalog </button>
 
         </div>
-        <div class="carousel h-full rounded-2xl">
-            <div class="h-full bg-slate-200 border border-slate-300 min-w-[30%] p-[2%] carousel-item text-black" v-for="i in [0, 1, 2, 3, 4, 5, 6, 7]">
+        <div class="carousel h-full rounded-2xl mt-[2%]">
+            <div class="h-full bg-slate-200 border border-slate-300 min-w-[30%] p-[2%] carousel-item text-black" v-for="i in [0, 1, 2, 3, 4, 5, 6, 7]" :course="{
+
+            }">
                 sample book cover change this to an img tag when its time
             </div>
         </div>

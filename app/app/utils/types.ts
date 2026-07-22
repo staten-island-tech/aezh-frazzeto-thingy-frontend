@@ -9,6 +9,4 @@ export type Course = {
     courseName: string,
     teacherName: string,
     nextAssignmentDueDate: string,
-    selected: boolean,
-    
 }

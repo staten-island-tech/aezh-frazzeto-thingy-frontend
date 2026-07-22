@@ -1,9 +1,9 @@
 <template>
     <div class="drawer">
-        <input id="my-drawer-1" type="checkbox" class="drawer-toggle" />
+        <input id="courses-drawer" type="checkbox" class="drawer-toggle" />
         <div class="drawer-content">
             <!-- Page content here -->
-            <label for="my-drawer-1" class="btn btn-circle swap swap-rotate ml-[2%] mt-[2%]">
+            <label for="courses-drawer" class="btn btn-circle swap swap-rotate ml-[2%] mt-[2%]">
                 <!-- this hidden checkbox controls the state -->
                 <input type="checkbox" />
 
@@ -18,17 +18,19 @@
             </label>
         </div>
         <div class="drawer-side">
-            <label for="my-drawer-1" aria-label="close sidebar" class="drawer-overlay"></label>
+            <label for="courses-drawer" aria-label="close sidebar" class="drawer-overlay"></label>
             <ul class="menu min-h-full w-80 p-4 bg-[#FFE9CC] pt-10">
                 <h2 class="forum text-2xl text-black">Your Classes</h2>
                 <div class="h-1 rounded-full bg-[#ffcbab] my-3"></div>
-                <classes-class-button v-for="i in [0, 1,2 , 3, 4, 5]"></classes-class-button>
+                <classes-class-button @select="(course) => $emit('select', course)"
+                v-for="i in [1, 2, 3, 4, 5, 6, 7, 8, 9]" :courseName="`English Pd ${i}`" :teacher-name="'Mr. Frazzetto'" :next-due-date="'7/23/2026'"></classes-class-button>
             </ul>
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
+const emit = defineEmits(['select'])
 const isHover = ref<boolean>(false)
 const hoverClass = computed(() => {
     return isHover.value ? '#ffdac9' : '#FFE9CC'

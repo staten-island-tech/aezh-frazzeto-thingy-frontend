@@ -14,7 +14,7 @@
                         v-if="errorMessage">
                         Error: {{ errorMessage }}
                     </div>
-                    <div class="bg-emerald-300 rounded-full border-2 border-emerald-500 px-[3%] h-[15%] forum font-bold w-full"
+                    <div class="bg-emerald-300 rounded-full border-2 border-emerald-500 px-[3%] h-[15%] forum font-bold w-full mt-[1%]"
                         v-if="successfulPasswordChange">
                         Password successfully changed!
                     </div>
