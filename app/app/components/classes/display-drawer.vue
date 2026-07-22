@@ -24,6 +24,8 @@
                 <div class="h-1 rounded-full bg-[#ffcbab] my-3"></div>
                 <classes-class-button @select="(course) => $emit('select', course)"
                 v-for="i in [1, 2, 3, 4, 5, 6, 7, 8, 9]" :courseName="`English Pd ${i}`" :teacher-name="'Mr. Frazzetto'" :next-due-date="'7/23/2026'"></classes-class-button>
+                <div class="h-1 rounded-full bg-[#ffcbab] mb-2 -mt-3" ></div>
+                <classes-join-class></classes-join-class>
             </ul>
         </div>
     </div>

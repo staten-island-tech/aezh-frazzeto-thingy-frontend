@@ -20,3 +20,8 @@
 .boldonse {
   font-family: "Boldonse", system-ui;
 }
+
+html, body {
+  background-color: #FEDBB3; 
+  outline: none
+}
