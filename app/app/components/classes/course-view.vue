@@ -1,6 +1,9 @@
 <template>
-    <div class="text-[4rem]" v-if="prop.course !== null">
-        {{ prop.course!.courseName }}
+    <div class="w-full px-[1%]">
+        <classes-course-header :course="prop.course"></classes-course-header>
+        <div class="w-full h-[78%] border-2 border-black">
+
+        </div>
     </div>
 </template>
 
@@ -10,6 +13,4 @@ const prop = defineProps<{
 }>()
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
