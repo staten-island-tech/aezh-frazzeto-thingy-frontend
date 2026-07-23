@@ -2,7 +2,7 @@
     <div class="p-[1%] flex flex-col gap-6 text-black right-2 top-12 fixed w-[70vw] lg:w-[40vw]">
         <div class="bg-[#FFE9CC] rounded-3xl border-2 border-[#ffcbab] shadow-sm p-8 flex flex-col items-center gap-6">
             <div class="flex justify-between w-full items-center">
-                <h2 class="text-3xl forum font-bold text-center"> Options </h2>
+                <h2 class="text-3xl forum font-bold text-center"> Options [username] </h2>
                 <button @click="$emit('close')"
                     class="text-black forum text-2xl bg-[#FAE6DA] border-2 border-[#ffcbab] rounded-full transition-all duration-300 ease-in-out hover:bg-[#ffdac9] hover:-translate-y-[2%] active:translate-y-[2%] w-[20%] text-center justify-center items-center">Exit</button>
             </div>

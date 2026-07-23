@@ -1,5 +1,5 @@
 <template>
-    <h4 class="forum text-black text-xl text-center w-full mb-[0.5%]">
+    <h4 class="forum text-black text-xl text-center w-full mb-[0.5%] font-bold">
         Join a Class
     </h4>
     <div class="max-w-full flex items-center justify-between">
@@ -15,8 +15,8 @@
             @animationend="wobbling = false"
         />
         <button 
-            @click="verifyClassCode"
-            class="max-w-[30%] whitespace-nowrap text-black forum text-lg bg-[#FAE6DA] border-2 border-[#ffcbab] px-6 py-2 rounded-full transition-all duration-300 ease-in-out hover:bg-[#ffdac9] hover:-translate-y-[2%] active:translate-y-[2%]"
+            @click="verifyClassCode()"
+            class="max-w-[30%] whitespace-nowrap text-black forum text-lg bg-[#FAE6DA] border-2 border-[#ffcbab] px-6 py-2 rounded-full transition-all duration-300 ease-in-out hover:bg-[#ffdac9] hover:-translate-y-[2%] active:translate-y-[2%] font-bold"
         >
             Join
         </button>

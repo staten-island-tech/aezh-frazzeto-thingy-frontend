@@ -8,8 +8,8 @@
         <div class="drawer-side">
             <label for="courses-drawer" aria-label="close sidebar" class="drawer-overlay"></label>
             <ul class="menu min-h-full w-80 p-4 bg-[#FFE9CC] pt-10">
-                <div class="flex justify-between max-h-[10%] items-center">
-                    <h2 class="forum text-2xl text-black w-[70%]">Your Classes</h2>
+                <div class="flex justify-between max-h-[10%] items-center  mb-[-5%]">
+                    <h2 class="forum text-2xl text-black w-[70%] font-bold">Your Classes</h2>
                     <button v-if="userType==='Admin'" @click=""
                     class="text-black forum bg-[#FAE6DA] border-2 border-[#ffcbab] rounded-full transition-all duration-300 ease-in-out hover:bg-[#ffdac9] hover:rotate-[7deg] active:rotate-[15deg] text-center justify-center items-center aspect-square w-[15%] h-[15%] text-2xl font-bold">+</button>
                 </div>

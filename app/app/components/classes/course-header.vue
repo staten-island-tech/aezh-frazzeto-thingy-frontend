@@ -16,12 +16,12 @@
             <!-- close icon -->
         </label>
         <div class="text-[4rem] text-left w-full" v-if="prop.course !== null">
-            <h2 class="forum text-3xl text-black w-full h-full">
+            <h2 class="forum text-3xl text-black w-full h-full font-bold">
                 {{ prop.course!.courseName }} - {{ prop.course!.teacherName }}
             </h2>
         </div>
         <div v-else>
-            <h2 class="forum text-3xl text-black w-full h-full">
+            <h2 class="forum text-3xl text-black w-full h-full font-bold">
                 [Select a Class]
             </h2>
         </div>
