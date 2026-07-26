@@ -4,7 +4,7 @@
             <h2 class="forum text-[1.8rem] text-black font-bold"> Interested in these?</h2>
             <button @click="async () => {await navigateTo('/catalog')}"
             class="forum text-2xl bg-[#FAE6DA] border-[#ffcbab] border-2  px-[5%] text-black rounded-full w-[40%]
-            transition-all duration-300 ease-in-out hover:bg-[#ffdac9] hover:-translate-y-[2%] active:translate-y-[2%] h-[70%]">
+            transition-all duration-300 ease-in-out hover:bg-[#ffdac9] hover:translate-y-[-2%] active:translate-y-[2%] h-[70%]">
                     View Catalog </button>
 
         </div>

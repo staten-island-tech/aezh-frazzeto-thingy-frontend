@@ -1,5 +1,5 @@
 <template>
-    <div class="!pt-0 bg-[#FEDBB3] h-screen px-[1%] flex flex-col items-center justify-center">
+    <div class="pt-0! bg-[#FEDBB3] h-screen px-[1%] flex flex-col items-center justify-center">
         <div class="bg-[#FFCCA6] w-[95%] h-[90%] rounded-lg flex flex-row items=center justify-center mt-0">
             <catalog-book-cover class="p-[2.5%] w-[20%] min-h-[40%]" v-for="book in books" :key="book.name" :book="book"/>
         </div>
