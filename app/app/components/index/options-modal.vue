@@ -1,10 +1,9 @@
 <template>
-    <div class="p-[1%] flex flex-col gap-6 text-black right-2 top-12 fixed w-[70vw] lg:w-[40vw]">
+    <div class="p-[1%] flex flex-col gap-6 text-black right-2 top-12 fixed w-[70vw] lg:w-[40vw] z-2">
         <div class="bg-[#FFE9CC] rounded-3xl border-2 border-[#ffcbab] shadow-sm p-8 flex flex-col items-center gap-6">
             <div class="flex justify-between w-full items-center">
                 <h2 class="text-3xl forum font-bold text-center"> Options [username] </h2>
-                <button @click="$emit('close')"
-                    class="text-black forum text-2xl bg-[#FAE6DA] border-2 border-[#ffcbab] rounded-full transition-all duration-300 ease-in-out hover:bg-[#ffdac9] hover:translate-y-[-2%] active:translate-y-[2%] w-[20%] text-center justify-center items-center">Exit</button>
+                <X :size="40" @click="$emit('close')" class="rounded-full hover:bg-amber-400/20 p-[2%] transition-colors duration-200 ease-in"/>
             </div>
             <div class="h-full w-full">
                 <index-change-password></index-change-password>
@@ -31,6 +30,7 @@
 </template>
 
 <script setup lang="ts">
+import { X } from 'reicon-vue';
 const emit = defineEmits(['close'])
 const loggedIn = ref<boolean>(true) // CONVERT THIS INTO BACKEND STUFF
 const userType = ref<("Admin" | "Student")>("Admin")
