@@ -1,8 +1,8 @@
 <template>
-    <div class="bg-[#FFE9CC] rounded-3xl border-2 border-[#ffcbab] shadow-sm p-8 flex flex-col items-center gap-6">
+    <div class="bg-[#FFE9CC] rounded-3xl border-2 border-[#ffcbab] shadow-sm p-8 flex flex-col items-center gap-6 text-black">
                 <h3 class="text-3xl forum font-bold text-center text-[#4a3a28]">{{ userType }} Log In</h3>
 
-                <div class="w-full flex flex-col gap-4">
+                <div class="w-full flex flex-col gap-4 text-black">
                     <input type="text"
                         class="border-2 border-[#ffcbab] w-full rounded-xl px-4 py-3 elms-sans focus:outline-none focus:border-[#FF9A5A] text-left text-lg forum bg-[#FFE1A8] placeholder-[#a9895f] transition-colors"
                         placeholder="Username" v-model="user">

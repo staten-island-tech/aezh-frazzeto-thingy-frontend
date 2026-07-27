@@ -6,7 +6,7 @@
       <img class="rounded-lg z-0" :src="book.cover" />
       <transition class="transition-all duration-200 ease-in-out">
       <div
-        class="bg-white absolute rounded-lg top-[0%] z-50 flex flex-row overflow-hidden hover:scale-110 origin-top-left"
+        class="bg-white absolute rounded-lg top-[0%] z-1 flex flex-row overflow-hidden hover:scale-110 origin-top-left"
         :class="hoverClasses"
         v-if="isHovered">
         <img class="rounded-lg max-w-[18vw]" :src="book.cover" />
