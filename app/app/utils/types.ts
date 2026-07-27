@@ -6,3 +6,5 @@ export type book = {
 }
 
 export type ishovered = boolean
+
+export type newBookname = string
