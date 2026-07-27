@@ -4,10 +4,11 @@
             @click="async () => { await navigateTo('/') }">SITHS Book Review</h1>
         <div class="flex lg:w-[40%] w-[70%] justify-between items-center">
             <button @click="async () => { await navigateTo('/catalog') }"
-                class="forum text-2xl bg-[#FAE6DA] border-2 border-[#ffcbab] px-[5%] rounded-full transition-all duration-300 ease-in-out hover:bg-[#ffdac9] hover:translate-y-[-2%] active:translate-y-[2%] text-black">
+                class="forum text-2xl bg-[#FAE6DA] border-2 border-[#ffcbab] px-[5%] rounded-full transition-all duration-300 ease-in-out hover:bg-[#ffdac9] hover:translate-y-[-2%] active:translate-y-[2%] text-black flex justify-around items-center gap-2">
+                <BookOpen :weight="'Filled'" :size="24" />
                 Catalog </button>
             <button @click="async () => { await navigateTo('/classes') }"
-                class="text-black forum text-2xl bg-[#FAE6DA] border-2 border-[#ffcbab] px-[5%] rounded-full transition-all duration-300 ease-in-out hover:bg-[#ffdac9] hover:translate-y-[-2%] active:translate-y-[2%]">
+                class="text-black forum text-2xl bg-[#FAE6DA] border-2 border-[#ffcbab] px-[5%] rounded-full transition-all duration-300 ease-in-out hover:bg-[#ffdac9] hover:translate-y-[-2%] active:translate-y-[2%] flex justify-around items-center gap-2"> <MortarboardSquare :size="24" weight="Filled" />
                 Classes </button>
             <Gear class="hover:rotate-15 active:rotate-45 transition-all duration-300 ease-in-out" :size="32" weight="Filled" :color="'black'" @click="showSettings = !showSettings" />
         </div>
@@ -19,6 +20,8 @@
 </template>
 
 <script setup lang="ts">
+import { MortarboardSquare } from 'reicon-vue';
+import { BookOpen } from 'reicon-vue';
 import { Gear } from 'reicon-vue'
 
 const showSettings = ref<boolean>(false)
@@ -43,6 +46,5 @@ const loggedIn = ref<boolean>(true) // they shouldnt be able to use settings if 
 .options-modal-leave-from {
     opacity: 1;
     scale: 1;
-
 }
 </style>

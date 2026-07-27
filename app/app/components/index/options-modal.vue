@@ -11,7 +11,7 @@
                 <div class="h-1 rounded-full bg-[#ffcbab] my-2"></div>
 
                 <div class="w-full" v-if="userType==='Admin'">
-                                    <label class="label text-black forum mt-[1%]">
+                <label class="label text-black forum mt-[1%]">
                     <input type="checkbox" :checked="isChecked" class="checkbox border-2 border-[#ffcbab] p-[2%] accent-[#ffcbab]" @click="isChecked = !isChecked" />
                     Use Admin Controls
                     
