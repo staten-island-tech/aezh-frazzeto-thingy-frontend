@@ -5,6 +5,8 @@ export type Book = {
     cover: string
 }
 
+export type isHovered = boolean
+
 export type Course = {
     courseName: string,
     teacherName: string,
