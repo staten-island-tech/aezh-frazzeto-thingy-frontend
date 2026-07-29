@@ -1,14 +1,30 @@
 <template>
-  <div>
-    <img class="rounded-lg z-0 h-[30vh] w-[20vw] overflow-hidden shadow-sm hover:shadow-lg active:shadow-none hover:scale-[1.03] hover:-translate-y-0.5 active:translate-y-1 transition-all duration-300 ease-in-out active:scale-[0.97]" :src="book.cover"> </img
-    <button
-    @click="async () => { await navigateTo('/book/' + book.id) }" :key="book.id" :book="book">
-    </button>
+  <div class="relative w-45! h-67.5! shrink-0">
+    <img @click="isSelected = !isSelected"
+      class="absolute w-full h-full object-cover rounded-lg z-0 shadow-sm hover:shadow-lg active:shadow-none hover:scale-[1.03] hover:-translate-y-2 shadow-slate-600 active:translate-y-1 transition-all duration-300 ease-in-out active:scale-[0.97]"
+      :src="book.cover"
+    />
+    <transition name="slide-fade">
+        <aside class="absolute bg-white h-full w-[150%] translate-x-[18vw] rounded-lg shadow-lg p-2 shadow-slate-600 z-1 flex flex-col justify-between py-4" v-if="isSelected">
+            <div>
+                <h3 class="forum text-center text-md"> {{ book.name }} <span class="text-xs italic"> (written by {{ book.author }}) </span></h3>
+                <div class="h-1 rounded-full bg-slate-800 my-2 w-full"></div>
+            </div>
+            <catalog-stars-container :stars="book.rating"></catalog-stars-container>
+             <button
+            class="shadow-sm forum text-2xl bg-white px-[5%] transition-all duration-300 ease-in-out hover:bg-sky-400/20 hover:-translate-y-px active:translate-y-0.5 text-black w-full rounded-full active:bg-sky-400/60 flex items-cetner justify-between"
+            @click="async () => { await navigateTo(`/book/${book_id}`) }">
+            <Eye :size="32" weight="Filled" :color="'gray'"/> View More </button>
+        </aside>
+    </transition>
   </div>
 </template>
 
 <script setup lang="ts">
-const isHovered = ref<boolean>(false)
+import { Eye } from 'reicon-vue';
+
+const isSelected = ref<boolean>(false)
+const book_id = ref<boolean>(1)
 
 defineProps({
   book: {
@@ -18,4 +34,20 @@ defineProps({
 })
 </script>
 
-<style scoped></style>
+<style scoped>
+.slide-fade-enter-active,
+.slide-fade-leave-active {
+    transition: all 0.3s ease
+}
+
+.slide-fade-enter-to, 
+.slide-fade-leave-from {
+    opacity: 1;
+    translate: 18vw;
+}
+.slide-fade-enter-from, 
+.slide-fade-leave-to {
+    opacity: 0;
+    translate: 0%
+}
+</style>
