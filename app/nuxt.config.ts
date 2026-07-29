@@ -1,19 +1,16 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
-import tailwindcss from '@tailwindcss/vite'
+import tailwindcss from "@tailwindcss/vite";
 
 export default defineNuxtConfig({
-  compatibilityDate: '2025-07-15',
+  compatibilityDate: "2025-07-15",
   devtools: { enabled: true },
-  modules: ['@pinia/nuxt'],
-  css: ['~/assets/main.css'],
+  modules: ["@pinia/nuxt"],
+  css: ["~/assets/main.css"],
   pages: true,
   vite: {
     plugins: [tailwindcss()],
     optimizeDeps: {
-      include: [
-        '@vue/devtools-core',
-        '@vue/devtools-kit',
-      ]
-    }
-  }
-})
+      include: ["@vue/devtools-core", "@vue/devtools-kit"],
+    },
+  },
+});

@@ -3,6 +3,7 @@ export type Book = {
     author: string
     rating: number
     cover: string
+    id: number
 }
 
 export type isHovered = boolean
