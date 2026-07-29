@@ -43,8 +43,10 @@
                     class="w-full gap-2 px-4 bg-white shadow-sm rounded-2xl min-h-10 flex justify-between items-center text-black forum text-left my-1">
                     Edit Class Name
                     <input type="text" placeholder="New Name..." maxlength="35" class="bg-slate-100 rounded-lg text-center focus:outline-none shadow-xs focus:shadow-md transition-all duration-300 ease-in-out text-sm px-0.5 w-[50%]
-                    "> 
-                    <Add :size="24" class="transition-all duration-300 ease-in-out hover:bg-emerald-400/20 active:bg-emerald-400/60 rounded-full aspect-square -ml-2"/>
+                    ">                  
+                    <div class="transition-all duration-300 ease-in-out hover:bg-yellow-400/20 active:bg-yellow-400/60 rounded-full aspect-square -ml-2">
+                        <Pen :size="24" />
+                    </div>
                 </button>
                 <button 
                     class="transition-all duration-300 ease-in-out shadow-sm min-h-10 flex justify-between px-4 items-center rounded-2xl text-black forum hover:shadow-lg hover:-translate-y-0.5 active:translate-y-1 hover:bg-red-400/20 active:bg-red-400/60 active:shadow-none gap-2 w-full ">
