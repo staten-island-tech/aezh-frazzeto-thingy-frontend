@@ -1,6 +1,7 @@
 export type Book = {
     name: string
     author: string
+    genre: string
     rating: number
     cover: string
     id: number
@@ -14,4 +15,9 @@ export type Course = {
     nextAssignmentDueDate: string,
 }
 
-export type newBookname = string
+export type Student = {
+    username: string,
+    name: string,
+    submittedRecentReview: boolean,
+    recentReviewPath: string
+}

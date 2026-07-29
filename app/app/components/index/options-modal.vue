@@ -8,21 +8,11 @@
             <div class="h-full w-full">
                 <index-change-password></index-change-password>
 
-                <div class="h-1 rounded-full bg-slate-800 my-2"></div>
-
-                <div class="w-full" v-if="userType==='Admin'">
-                <label class="label text-black forum mt-[1%]">
-                    <input type="checkbox" :checked="isChecked" class="checkbox border-2 border-slate-800 p-[2%] bg-slate-700 shadow-md" @click="isChecked = !isChecked" />
-                    Use Admin Controls
-                    
-                </label>
-                <div class="h-1 rounded-full bg-slate-800 my-2"></div>
-
-                </div>
+                <div class="h-1 rounded-full bg-slate-800 my-4"></div>
 
             </div>
             <button
-                class="forum text-xl bg-white  px-[5%] rounded-2xl transition-all duration-300 ease-in-out hover:bg-red-100 hover:translate-y-[-2%] active:translate-y-[2%] w-full flex items-center justify-center gap-2 shadow-sm"
+                class="forum text-xl bg-white  px-[5%] rounded-2xl transition-all duration-300 ease-in-out hover:bg-red-400/20 hover:shadow-md active:shadow-none active:bg-red-400/60 hover:translate-y-[-2%] active:translate-y-[2%] w-full flex items-center justify-center gap-2 shadow-sm"
                 @click="async () => { loggedIn = false; $emit('close'); await navigateTo('/login') }">
                 <ArrowDoorIn :size="24" weight="Filled" /> Log Out </button>
         </div>

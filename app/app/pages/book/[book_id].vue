@@ -1,42 +1,23 @@
 <template>
   <div
-    class="!pt-0 bg-[#FEDBB3] h-screen px-[1%] flex flex-col items-center justify-center"
+    class="h-dvh px-[1%] flex flex-col items-center justify-center"
   >
+    <book-bk-header :book-title="'Book Title'"></book-bk-header>
     <div
-      class="bg-[#FFCCA6] w-[90%] h-[90%] rounded-lg flex flex-col items-center justify-center"
+      class="w-full h-[70vh] p-2 bg-slate-200 shadow-md mt-[3vh] rounded-lg flex items-center justify-between"
     >
-      <div class="bg-[#FFFFFF] w-[95%] h-[95%] rounded-lg flex flex-row">
-        <div class="w-[20%] flex flex-col items-center">
           <img
-            class="rounded-lg max-w-[15vw] p-[1%]"
+            class="h-[50%] lg:h-[95%] shadow-lg shadow-slate-500 rounded-2xl "
             src="https://m.media-amazon.com/images/I/51Ppi-8kISL._SY445_SX342_QL70_FMwebp_.jpg"
           />
-          <button
-            class="border-[#ffcbab] border-2 forum text-[0.875rem] text-black bg-[#FAE6DA] p-[5%] m-[1%] rounded-2xl transition-all duration-300 ease-in-out hover:bg-[#ffdac9] hover:-translate-y-[2%] active:translate-y-[2%] h-[8%]"
-          >
-            Write Review
-          </button>
-          <button
-            class="border-[#ffcbab] border-2 forum text-[0.875rem] text-black bg-[#FAE6DA] p-[5%] m-[1%] rounded-2xl transition-all duration-300 ease-in-out hover:bg-[#ffdac9] hover:-translate-y-[2%] active:translate-y-[2%] h-[8%]"
-          >
-            Submit Assignment
-          </button>
-        </div>
-        <div class="w-[30%]">
-          <h2 class="forum text-[1.25rem] text-black">
-            Harry Potter and the Sorcerer's Stone
-          </h2>
-          <h3 class="forum text-[1rem] text-black">JK Roling</h3>
-          <h3 class="forum text-[1rem] text-black">3/5</h3>
-        </div>
-        <div class="w-[50%] h-[100%] overflow-y-auto">
-          <book-review-button
-            v-for="review in placeholderListofReviews"
-            :key="review.id"
-            :review="review"
-          />
-        </div>
-      </div>
+          <div class="bg-white h-full rounded-2xl w-[60%] p-2 flex flex-col items-center">
+            <div class="flex justify-between px-[3] items-center h-[7%] w-full"> <h4 class="forum text-lg lg:text-2xl text-black font-bold w-[65%]"> Book Title - Book Genre </h4> <catalog-stars-container :size="32" :stars="3" class="w-[30%] h-full"></catalog-stars-container> </div> 
+            <div class="h-1 rounded-full bg-slate-800 my-2 w-full"></div>
+            <div class="w-full h-[90%] flex flex-col gap-2 items-center overflow-y-scroll">
+                <book-review-editor></book-review-editor>
+                <book-review-button v-for="review in placeholderListofReviews" :review="review"></book-review-button>
+            </div>
+          </div>
     </div>
   </div>
 </template>
