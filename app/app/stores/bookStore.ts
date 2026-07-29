@@ -5,8 +5,9 @@ export const useBookStore = defineStore("arrays", {
     Books: [
       {
         name: "Harry Potter and the Sorcerer's Stone",
-        author: "JK Roling",
+        author: "JK Rowling",
         rating: 3,
+        genre: "Fiction",
         cover:
           "https://m.media-amazon.com/images/I/51Ppi-8kISL._SY445_SX342_QL70_FMwebp_.jpg",
         id: 1,
@@ -14,6 +15,7 @@ export const useBookStore = defineStore("arrays", {
       {
         name: "To Kill A Mockingbird",
         author: "Harper Lee",
+        genre: "Historical Fiction",
         rating: 4,
         id: 2,
         cover:
@@ -22,7 +24,7 @@ export const useBookStore = defineStore("arrays", {
     ],
   }),
   actions: {
-    addBook(newBook: { name: string; author: string; cover: string }) {
+    addBook(newBook: { name: string; author: string; cover: string; genre: string }) {
       const book = {
         ...newBook,
         rating: 0,

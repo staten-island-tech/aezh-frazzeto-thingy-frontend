@@ -17,11 +17,11 @@
 
                 <div class="flex w-full gap-4 justify-center">
                     <button @click="logIn()"
-                        class="flex-1 forum text-lg bg-slate-100 hover:bg-sky-100 py-2 rounded-xl transition-all duration-300 ease-in-out hover:-translate-y-0.5 active:translate-y-0.5 shadow-sm hover:shadow-md">
+                        class="flex-1 forum text-lg bg-slate-100 hover:bg-sky-400/20 active:shadow-none active:bg-sky-400/60 py-2 rounded-xl transition-all duration-300 ease-in-out hover:-translate-y-0.5 active:translate-y-0.5 shadow-sm hover:shadow-md">
                         Log in
                     </button>
                     <button @click="signUp()" v-if="userType==='Student'"
-                        class="flex-1 forum text-lg bg-slate-100 hover:bg-emerald-400/20  py-2 rounded-xl transition-all duration-300 ease-in-out hover:-translate-y-0.5 active:translate-y-0.5 shadow-sm hover:shadow-md">
+                        class="flex-1 forum text-lg bg-slate-100 hover:bg-emerald-400/20 over:shadow-md active:shadow-none active:bg-emerald-400/60 py-2 rounded-xl transition-all duration-300 ease-in-out hover:-translate-y-0.5 active:translate-y-0.5 shadow-sm hover:shadow-md">
                         Sign Up
                     </button>
                 </div>

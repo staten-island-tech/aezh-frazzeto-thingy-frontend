@@ -1,5 +1,5 @@
 <template>
-    <div class="shadow-md h-full w-[40vw]! bg-white rounded-2xl p-4 carousel-item flex flex-col mx-2">
+    <div class="shadow-md h-[94%] w-[40vw]! rounded-2xl p-4 carousel-item flex flex-col mx-2" :class="isArchived ? 'bg-sky-100' : 'bg-white'">
         <h3 class="text-slate-800 forum text-2xl text-center font-black">{{ teacherName }}'s {{ courseName }}, Period {{
             prop.periodNumber }}</h3>
         <p class="text-lg italic forum text-slate-600 text-center">your role: {{ userRole }}</p>
@@ -24,30 +24,31 @@
             <div class="flex justify-between flex-wrap gap-4" v-if="userRole === 'Admin'">
                 <h2 class="text-2xl text-black forum font-bold">Actions:</h2>
                 <button 
-                    class="w-full transition-all duration-300 ease-in-out shadow-sm min-h-12 flex justify-between px-2 items-center rounded-2xl text-black forum hover:shadow-lg hover:-translate-y-0.5 active:translate-y-1 hover:bg-emerald-400/20 active:bg-emerald-400/60 active:shadow-none gap-2 mt-2">
+                    class="w-full transition-all duration-300 ease-in-out shadow-sm min-h-12 flex justify-between px-4 items-center rounded-2xl text-black forum hover:shadow-lg hover:-translate-y-0.5 active:translate-y-1 hover:bg-emerald-400/20 active:bg-emerald-400/60 active:shadow-none gap-2 mt-2">
                     <User :size="24" />
                     Students/Assignments
                 </button>
                 <button 
-                    class="transition-all duration-300 ease-in-out shadow-sm min-h-12 flex justify-between px-2 items-center rounded-2xl text-black forum hover:shadow-lg active:translate-y-1 hover:-translate-y-0.5 hover:bg-amber-400/20 active:bg-amber-400/60 active:shadow-none gap-2 w-full ">
-                    <ArchiveDown2 :size="24" />
+                    class="transition-all duration-300 ease-in-out shadow-sm min-h-12 flex justify-between px-4 items-center rounded-2xl text-black forum hover:shadow-lg active:translate-y-1 hover:-translate-y-0.5 hover:bg-amber-400/20 active:bg-amber-400/60 active:shadow-none gap-2 w-full ">
+                    <Pen :size="24" />
                     Edit Class
                 </button>
                 <button 
-                    class="transition-all duration-300 ease-in-out shadow-sm min-h-12 flex justify-between px-2 items-center rounded-2xl text-black forum hover:shadow-lg hover:-translate-y-0.5 active:translate-y-1 hover:bg-red-400/20 active:bg-red-400/60 active:shadow-none gap-2 w-full ">
+                    class="transition-all duration-300 ease-in-out shadow-sm min-h-12 flex justify-between px-4 items-center rounded-2xl text-black forum hover:shadow-lg hover:-translate-y-0.5 active:translate-y-1 hover:bg-red-400/20 active:bg-red-400/60 active:shadow-none gap-2 w-full ">
                     <Trash2 :size="24" />
                     Delete Class
                 </button>
                 <button 
-                    class="transition-all duration-300 ease-in-out shadow-sm min-h-12 flex justify-between px-2 items-center rounded-2xl text-black forum hover:shadow-lg active:translate-y-1 hover:-translate-y-0.5 hover:bg-sky-400/20 active:bg-sky-400/60 active:shadow-none gap-2 w-full">
+                    class="transition-all duration-300 ease-in-out shadow-sm min-h-12 flex justify-between px-4 items-center rounded-2xl text-black forum hover:shadow-lg active:translate-y-1 hover:-translate-y-0.5 hover:bg-sky-400/20 active:bg-sky-400/60 active:shadow-none gap-2 w-full">
                     <ArchiveDown2 :size="24" />
                     Archive Class
                 </button>
             </div>
-            <button v-else class="transition-all duration-300 ease-in-out shadow-sm min-h-12 flex justify-between px-2 items-center rounded-2xl text-black forum hover:shadow-lg hover:-translate-y-0.5 active:translate-y-1 hover:bg-red-400/20 active:bg-red-400/60 active:shadow-none gap-2 w-full mt-2">
+            <button v-else class="transition-all duration-300 ease-in-out shadow-sm min-h-12 flex justify-between px-4 items-center rounded-2xl text-black forum hover:shadow-lg hover:-translate-y-0.5 active:translate-y-1 hover:bg-red-400/20 active:bg-red-400/60 active:shadow-none gap-2 w-full mt-4">
                 <ArrowDoorIn :size="24" />
                     Leave Class
             </button>
+            <h2 v-if="isArchived" class="forum text-black italic text-center text-lg mt-1 -mb-1">This class is archived.</h2>
         </div>
     </div>
 </template>
@@ -57,9 +58,11 @@ import { Trash2 } from 'reicon-vue';
 import { ArchiveDown2 } from 'reicon-vue';
 import { User } from 'reicon-vue';
 import { ArrowDoorIn } from 'reicon-vue';
+import { Pen } from 'reicon-vue';
 
 const prop = defineProps<{
     periodNumber: number
+    isArchived: boolean
 }>()
 
 const courseName = ref<string>('English')

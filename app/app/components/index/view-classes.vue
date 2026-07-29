@@ -6,7 +6,7 @@
             <p class="forum md:text-sm text-xs text-black text-center"> Check out your classes. </p>
         </div>
         <button
-            class="shadow-sm forum text-2xl bg-white px-[5%] transition-all duration-300 ease-in-out hover:bg-sky-100 hover:translate-y-[-2%] active:translate-y-[2%] h-[60%] text-black w-full rounded-full"
+            class="shadow-sm forum text-2xl bg-white px-[5%] transition-all duration-300 ease-in-out hover:bg-sky-400/20 hover:shadow-md active:shadow-none active:bg-sky-400/60 hover:translate-y-[-2%] active:translate-y-[2%] h-[60%] text-black w-full rounded-full"
             @click="async () => { await navigateTo('/classes') }">
             View Classes </button>
     </div>

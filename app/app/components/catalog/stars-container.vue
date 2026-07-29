@@ -1,5 +1,5 @@
 <template>
-    <div class="w-full h-[30%] border border-black">
+    <div class="border border-black">
 
     </div>
 </template>

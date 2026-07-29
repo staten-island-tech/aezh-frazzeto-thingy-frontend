@@ -10,11 +10,12 @@
                 <h3 class="forum text-center text-md"> {{ book.name }} <span class="text-xs italic"> (written by {{ book.author }}) </span></h3>
                 <div class="h-1 rounded-full bg-slate-800 my-2 w-full"></div>
             </div>
-            <catalog-stars-container :stars="book.rating"></catalog-stars-container>
+            <p class="forum text-black"> Rating: </p>
+            <catalog-stars-container :stars="book.rating" class="w-full h-[15%]"></catalog-stars-container>
              <button
             class="shadow-sm forum text-2xl bg-white px-[5%] transition-all duration-300 ease-in-out hover:bg-sky-400/20 hover:-translate-y-px active:translate-y-0.5 text-black w-full rounded-full active:bg-sky-400/60 flex items-cetner justify-between"
             @click="async () => { await navigateTo(`/book/${book_id}`) }">
-            <Eye :size="32" weight="Filled" :color="'gray'"/> View More </button>
+            <Eye :size="32" weight="Filled" :color="'#1d293d'"/> View More </button>
         </aside>
     </transition>
   </div>
@@ -24,7 +25,7 @@
 import { Eye } from 'reicon-vue';
 
 const isSelected = ref<boolean>(false)
-const book_id = ref<boolean>(1)
+const book_id = ref<number>(1)
 
 defineProps({
   book: {

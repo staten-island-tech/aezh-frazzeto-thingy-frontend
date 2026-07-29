@@ -1,6 +1,7 @@
 export type Book = {
     name: string
     author: string
+    genre: string
     rating: number
     cover: string
     id: number
