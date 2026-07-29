@@ -1,5 +1,5 @@
 <template>
-    <div class="shadow-md h-full w-[40vw]! bg-white rounded-2xl p-4 carousel-item flex flex-col">
+    <div class="shadow-md h-full w-[40vw]! bg-white rounded-2xl p-4 carousel-item flex flex-col mx-2">
         <h3 class="text-slate-800 forum text-2xl text-center font-black">{{ teacherName }}'s {{ courseName }}, Period {{
             prop.periodNumber }}</h3>
         <p class="text-lg italic forum text-slate-600 text-center">your role: {{ userRole }}</p>
