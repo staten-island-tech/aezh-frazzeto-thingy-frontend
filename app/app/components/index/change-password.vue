@@ -5,18 +5,18 @@
                 <h5 class="forum text-xl w-[70%]"> Change Password </h5>
             </div>
             <input type="password"
-                class="lg:mx-0 mx-[0.5%] w-[40%] rounded-2xl px-[2%] elms-sans focus:outline-none text-left text-xl forum bg-[#FFE1A8] placeholder-[#a9895f] focus:border-[#FF9A5A] border-[#ffcbab] border-2 transition-colors ease-in-out duration-300"
+                class="lg:mx-0 mx-[0.5%] w-[40%] rounded-2xl px-[2%] elms-sans focus:outline-none text-left text-xl forum bg-white placeholder-slate-400 shadow-sm hover:shadow-md transition-colors ease-in-out duration-300"
                 placeholder="New password..." v-model="passwordChange">
             <button
-                class="ml-1 forum text-xl bg-[#FAE6DA] px-[5%] rounded-2xl transition-all duration-300 ease-in-out hover:bg-[#ffdac9] hover:translate-y-[-2%] active:translate-y-[2%] h-[60%] border-[#ffcbab] border-2 "
+                class="ml-1 forum text-xl bg-white px-[5%] rounded-2xl transition-all duration-300 ease-in-out hover:bg-sky-100 hover:translate-y-[-2%] active:translate-y-[2%] h-[60%] shadow-sm "
                 @click="[errorMessage, successfulPasswordChange] = functionStore.validatePassword(passwordChange)">
                 Confirm </button>
         </div>
-        <div class="bg-red-400 rounded-full border-2 border-red-500 px-[3%] h-[15%] forum font-bold w-full mt-[1%]"
+        <div class="bg-red-400/80 rounded-full shadow-md shadow-red-400 px-[3%] h-[15%] forum font-bold w-full mt-[1%]"
             v-if="errorMessage">
             Error: {{ errorMessage }}
         </div>
-        <div class="bg-emerald-300 rounded-full border-2 border-emerald-500 px-[3%] h-[15%] forum font-bold w-full mt-[1%]"
+        <div class="bg-emerald-300 rounded-full shadow-md shadow-emerald-400/80 px-[3%] h-[15%] forum font-bold w-full mt-[1%]"
             v-if="successfulPasswordChange">
             Password successfully changed!
         </div>
