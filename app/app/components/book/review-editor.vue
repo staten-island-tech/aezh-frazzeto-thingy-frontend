@@ -17,10 +17,16 @@
             <input @click="starRating = 4" type="radio" name="rating-10" class="mask mask-star-2 bg-yellow-500" aria-label="4 star" />
             <input @click="starRating = 5" type="radio" name="rating-10" class="mask mask-star-2 bg-yellow-500" aria-label="5 star" />
         </div>
-        <button @click="uploadReview()"
-            class="flex-1 forum text-lg bg-slate-100 hover:bg-emerald-400/20 over:shadow-md active:shadow-none active:bg-emerald-400/60 py-2 rounded-xl transition-all duration-300 ease-in-out hover:-translate-y-0.5 active:translate-y-0.5 shadow-sm hover:shadow-md text-black">
-            Upload Review
-        </button>
+        <div class="flex justify-between w-full gap-2">
+            <button @click="uploadReview('free')"
+            class="flex-1 forum text-md lg:text-lg bg-slate-100 hover:bg-emerald-400/20 over:shadow-md active:shadow-none active:bg-emerald-400/60 py-2 rounded-xl transition-all duration-300 ease-in-out hover:-translate-y-0.5 active:translate-y-0.5 shadow-sm hover:shadow-md text-black w-[40%]">
+            Upload For Fun
+            </button>
+            <button @click="uploadReview('assignment')"
+            class="flex-1 forum text-md lg:text-lg bg-slate-100 hover:bg-emerald-400/20 over:shadow-md active:shadow-none active:bg-emerald-400/60 py-2 rounded-xl transition-all duration-300 ease-in-out hover:-translate-y-0.5 active:translate-y-0.5 shadow-sm hover:shadow-md text-black w-[40%]">
+            Upload To Assignment
+            </button>
+        </div>
     </div>
 </template>
 
@@ -28,7 +34,7 @@
 const reviewUpload = ref<string>('')
 const starRating = ref<number>(0)
 
-function uploadReview() {
+function uploadReview(uploadPurpose:('assignment' | 'free')) {
     console.log(reviewUpload.value, starRating.value)
     starRating.value = 0
     reviewUpload.value = ""

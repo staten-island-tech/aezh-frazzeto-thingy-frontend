@@ -15,4 +15,9 @@ export type Course = {
     nextAssignmentDueDate: string,
 }
 
-export type newBookname = string
+export type Student = {
+    username: string,
+    name: string,
+    submittedRecentReview: boolean,
+    recentReviewPath: string
+}

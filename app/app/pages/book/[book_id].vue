@@ -11,7 +11,7 @@
             src="https://m.media-amazon.com/images/I/51Ppi-8kISL._SY445_SX342_QL70_FMwebp_.jpg"
           />
           <div class="bg-white h-full rounded-2xl w-[60%] p-2 flex flex-col items-center">
-            <div class="flex justify-between px-[3] items-center h-[7%] w-full"> <h4 class="forum text-lg lg:text-2xl text-black font-bold w-[50%]"> Book Title - Book Genre </h4> <catalog-stars-container :stars="3" class="w-[45%] h-full"></catalog-stars-container> </div> 
+            <div class="flex justify-between px-[3] items-center h-[7%] w-full"> <h4 class="forum text-lg lg:text-2xl text-black font-bold w-[65%]"> Book Title - Book Genre </h4> <catalog-stars-container :size="32" :stars="3" class="w-[30%] h-full"></catalog-stars-container> </div> 
             <div class="h-1 rounded-full bg-slate-800 my-2 w-full"></div>
             <div class="w-full h-[90%] flex flex-col gap-2 items-center overflow-y-scroll">
                 <book-review-editor></book-review-editor>

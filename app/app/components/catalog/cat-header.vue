@@ -50,7 +50,7 @@
           placeholder="Book Genre"
         />
         <button
-          class=" forum text-[0.875rem] text-black bg-white hover:bg-emerald-400/20 active:bg-emerald-400/60 m-[1%] rounded-md transition-all p-1 duration-300 ease-in-out hover:-translate-y-px active:translate-y-0.5 shadow-sm hover:shadow-md active:shadow-none px-1 lg:w-20 w-full"
+          class=" forum text-[0.875rem] text-black bg-white hover:bg-emerald-400/20 active:bg-emerald-400/60 m-[1%] rounded-md transition-all p-1 duration-300 ease-in-out hover:-translate-y-px active:translate-y-0.5 shadow-sm hover:shadow-md active:shadow-none px-2 lg:w-20 w-full"
           @click="submitBook()"
         >
           Add Book
