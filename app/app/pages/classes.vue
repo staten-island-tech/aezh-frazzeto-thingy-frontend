@@ -1,8 +1,8 @@
 <template>
-    <div class="w-full px-[1%]">
+    <div class="w-full px-[2%]">
         <classes-course-header @menu-click="(mode) => bodyMode = mode"></classes-course-header>
-        <div class="w-full h-[78vh] border-2 border-black">
-
+        <div class="carousel bg-slate-200 h-[70vh] mt-[3vh] p-[2%] gap-2 shadow-lg rounded-2xl w-full">
+            <classes-course-carousel-item v-for="i in 9" :periodNumber="i"></classes-course-carousel-item>
         </div>
     </div>
     <transition name='highlight-background'>

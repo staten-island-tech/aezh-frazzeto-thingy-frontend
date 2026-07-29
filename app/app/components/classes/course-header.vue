@@ -16,7 +16,7 @@
             </div>
 
         </div>
-        <div class="h-1 rounded-full bg-[#ffcbab] my-2 w-full"></div>
+        <div class="h-1 rounded-full bg-slate-800 my-2 w-full"></div>
     </div>
 </template>
 
