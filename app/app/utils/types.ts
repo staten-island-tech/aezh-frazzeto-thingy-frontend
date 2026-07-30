@@ -1,23 +1,42 @@
-export type Book = {
+// interfaces that link to the backend
+
+import { User } from "reicon-vue"
+
+export interface Book   {
     name: string
     author: string
     genre: string
     rating: number
     cover: string
-    id: number
+    book_id: string
 }
 
-export type isHovered = boolean
-
-export type Course = {
+export interface Course {
+    course_id: string,
     courseName: string,
+    classCode: string,
     teacherName: string,
     nextAssignmentDueDate: string,
+    periodNumber: number,
 }
 
-export type Student = {
+export interface User {
+    user_id: string,
     username: string,
     name: string,
-    submittedRecentReview: boolean,
-    recentReviewPath: string
+}
+
+export interface Student extends User {
+    enrolledClasses: Course[]
+}
+
+export interface Review   {
+    book_id: string,
+    user_id: string,
+    rating: number
+}
+
+export interface Teacher   {
+    enrolledClasses: Course[]
+    ownedClasses: Course[]
 }

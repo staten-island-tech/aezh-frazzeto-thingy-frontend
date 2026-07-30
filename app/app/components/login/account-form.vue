@@ -5,7 +5,7 @@
                 <div class="w-full flex flex-col gap-4 text-black">
                     <input type="text"
                         class="shadow-sm bg-white focus:shadow-md placeholder-slate-400 w-full rounded-xl px-4 py-3 elms-sans focus:outline-none text-left text-lg forum transition-all"
-                        placeholder="Username" v-model="user">
+                        placeholder="Email" v-model="email">
                     <input type="password"
                         class="shadow-sm bg-white focus:shadow-md placeholder-slate-400 w-full rounded-xl px-4 py-3 elms-sans focus:outline-none text-left text-lg forum transition-all"
                         placeholder="Password" v-model="password">
@@ -35,10 +35,11 @@ defineProps<{
 
 const functionStore = useFunctionStore()
 
-const user = ref<string>("")
+const email = ref<string>("")
 const password = ref<string>("")
 
 const errorMessage = ref<string>("")
+const emailValid = ref<boolean>(false)
 const passwordValid = ref<boolean>(false)
 
 watch(() => password.value, () => errorMessage.value = "")
@@ -49,10 +50,14 @@ function logIn() {
 
 function signUp() {
     passwordValid.value = false
+    emailValid.value = false
+    if(!email.value.includes("@nycstudents.net")) {
+        errorMessage.value = "Invalid email address."
+    } else emailValid.value = true
     errorMessage.value = functionStore.validatePassword(password.value)[0]
     passwordValid.value = functionStore.validatePassword(password.value)[1]
 
-    if(passwordValid.value) {
+    if(passwordValid.value && emailValid.value) {
         navigateTo("/")
     }
 

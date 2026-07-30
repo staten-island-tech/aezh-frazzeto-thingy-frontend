@@ -1,7 +1,7 @@
 <template>
     <div class="flex flex-col gap-2 min-w-full min-h-[60%] bg-slate-200 rounded-2xl shadow-md p-2">
         <div class='flex flex-row justify-between items-center px-2 gap-2'>
-            <h2 class="forum text-black text-md lg:text-2xl text-center">Write your own review:</h2>
+            <h2 class="forum text-black text-md lg:text-2xl text-center">Write a Review:</h2>
             <p class="text-xs lg:text-md forum italic" :class="reviewUpload.length === 500 ? 'text-red-600' : 'text-black'">
                 ({{ reviewUpload.length }}/500 characters)</p>
         </div>
