@@ -7,6 +7,11 @@ export default defineNuxtConfig({
   modules: ["@pinia/nuxt"],
   css: ["~/assets/main.css"],
   pages: true,
+  app: {
+    head: {
+      title: "SITHS Book Review"
+    }
+  },
   vite: {
     plugins: [tailwindcss()],
     optimizeDeps: {
