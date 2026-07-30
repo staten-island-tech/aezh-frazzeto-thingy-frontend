@@ -69,8 +69,6 @@ import { useBookStore } from "~/stores/bookStore";
 const userType = ref<'Student' | 'Admin'>('Admin')
 
 const store = useBookStore();
-const books = store.Books;
-const addBook = store.addBook;
 
 const addingBook = ref<boolean>(false);
 const newBookName = ref("");
@@ -79,12 +77,12 @@ const newBookCover = ref("");
 const newBookGenre = ref("")
 
 function submitBook() {
-  addBook({
+  store.addBook({
     name: newBookName.value,
     author: newBookAuthor.value,
     cover: newBookCover.value,
     genre: newBookGenre.value
-  });
+  }); // POST THIS
 }
 function toggleAdding() {
     addingBook.value = !addingBook.value

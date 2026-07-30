@@ -13,7 +13,7 @@
             </div>
             <button
                 class="forum text-xl bg-white  px-[5%] rounded-2xl transition-all duration-300 ease-in-out hover:bg-red-400/20 hover:shadow-md active:shadow-none active:bg-red-400/60 hover:translate-y-[-2%] active:translate-y-[2%] w-full flex items-center justify-center gap-2 shadow-sm"
-                @click="async () => { loggedIn = false; $emit('close'); await navigateTo('/login') }">
+                @click="async () => { userStore.loggedIn = false; $emit('close'); await navigateTo('/login') }">
                 <ArrowDoorIn :size="24" weight="Filled" /> Log Out </button>
         </div>
     </div>
@@ -22,10 +22,10 @@
 <script setup lang="ts">
 import { X } from 'reicon-vue';
 import { ArrowDoorIn } from 'reicon-vue';
+const userStore = useUserStore()
+
 const emit = defineEmits(['close'])
-const loggedIn = ref<boolean>(true) // CONVERT THIS INTO BACKEND STUFF
-const userType = ref<("Admin" | "Student")>("Admin")
-const isChecked = ref<boolean>(false)
+
 </script>
 
 <style scoped></style>

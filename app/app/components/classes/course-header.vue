@@ -26,7 +26,7 @@ import { PlusCircle } from 'reicon-vue';
 
 const emit = defineEmits(['menu-click'])
 
-const userType = ref<'Student' | 'Admin'>('Admin')
+const userType = useUserStore().userType
 </script>
 
 <style scoped></style>
