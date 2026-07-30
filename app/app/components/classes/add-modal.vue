@@ -61,7 +61,8 @@ function createNewClass() {
                 classCode: generateRandomClassCode(),
                 teacherName: "Teacher Name",
                 nextAssignmentDueDate: "woah",
-                periodNumber: index + 1
+                periodNumber: index + 1,
+                assignedReviews: []
             } as Course)
         }
     })

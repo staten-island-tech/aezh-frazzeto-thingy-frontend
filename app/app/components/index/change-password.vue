@@ -9,7 +9,7 @@
                 placeholder="New password..." v-model="passwordChange">
             <button
                 class="ml-1 forum text-xl bg-white px-[5%] rounded-2xl transition-all duration-300 ease-in-out hover:bg-sky-400/20 hover:shadow-md active:shadow-none active:bg-sky-400/60 hover:translate-y-[-2%] active:translate-y-[2%] h-[60%] shadow-sm "
-                @click="[errorMessage, successfulPasswordChange] = functionStore.validatePassword(passwordChange)">
+                @click="[errorMessage, successfulPasswordChange] = validatePassword(passwordChange)">
                 Confirm </button>
         </div>
         <div class="bg-red-400/80 rounded-full shadow-md shadow-red-400 px-[3%] h-[15%] forum font-bold w-full mt-[1%]"
@@ -24,6 +24,16 @@
 </template>
 
 <script setup lang="ts">
+function validatePassword(passwordChange: string): [string, boolean] {
+            if (passwordChange.length === 0) return ["Empty password field.", false]
+            else if (passwordChange.length < 8) return ["Password must be at least 8 characters.", false]
+            else if (passwordChange.length > 50) return ["Password must be at most 50 characters.", false]
+            else if (!(/[0123456789]/.test(passwordChange))) return ["Password must contain at least one number.", false]
+            else if (!(/[!@#$%^&*():;,<.>/?]/.test(passwordChange))) return ["Password must contain at least one symbol.", false]
+            else if ((/ /.test(passwordChange))) return ["Password cannot contain spaces.", false]
+            else if (!(/[qwertyuiopasdfghjklzxcvbnm]/.test(passwordChange) && /[QWERTYUIOPASDFGHJKLZXCVBNM]/.test(passwordChange))) return ["Password requires one capital and one lowercase letter.", false]
+            else return ["", true]
+        }
 const functionStore = useFunctionStore()
 
 const passwordChange = ref<string>("")

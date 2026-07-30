@@ -10,12 +10,15 @@
             v-model="reviewUpload" maxlength="500"></textarea>
         <div class="rating rating-lg items-center justify-between px-2">
             <label class="w-[40%] text-black forum bg-slate-200">Rating: </label>
-            <input @click="starRating = 0" type="radio" name="rating-10" class="rating-hidden bg-yellow-500" aria-label="clear" />
-            <input @click="starRating = 1" type="radio" name="rating-10" class="mask mask-star-2 bg-yellow-500" aria-label="1 star" />
-            <input @click="starRating = 2" type="radio" name="rating-10" class="mask mask-star-2 bg-yellow-500" aria-label="2 star" />
-            <input @click="starRating = 3" type="radio" name="rating-10" class="mask mask-star-2 bg-yellow-500" aria-label="3 star" />
-            <input @click="starRating = 4" type="radio" name="rating-10" class="mask mask-star-2 bg-yellow-500" aria-label="4 star" />
-            <input @click="starRating = 5" type="radio" name="rating-10" class="mask mask-star-2 bg-yellow-500" aria-label="5 star" />
+            <input @click="starRating = 0; reviewed = true" type="radio" name="rating-10" class="rating-hidden bg-yellow-500" aria-label="clear" />
+            <input @click="starRating = 1; reviewed = true" type="radio" name="rating-10" class="mask mask-star-2 bg-yellow-500" aria-label="1 star" />
+            <input @click="starRating = 2; reviewed = true" type="radio" name="rating-10" class="mask mask-star-2 bg-yellow-500" aria-label="2 star" />
+            <input @click="starRating = 3; reviewed = true" type="radio" name="rating-10" class="mask mask-star-2 bg-yellow-500" aria-label="3 star" />
+            <input @click="starRating = 4; reviewed = true" type="radio" name="rating-10" class="mask mask-star-2 bg-yellow-500" aria-label="4 star" />
+            <input @click="starRating = 5; reviewed = true" type="radio" name="rating-10" class="mask mask-star-2 bg-yellow-500" aria-label="5 star" />
+        </div>
+        <div v-if="errorMessage" class="bg-red-400 shadow-md shadow-red-400 w-full p-1 rounded-2xl text-md forum text-center my-1">
+            Error: {{ errorMessage }}
         </div>
         <div class="flex justify-between w-full gap-2">
             <button @click="uploadReview('free')"
@@ -31,13 +34,29 @@
 </template>
 
 <script setup lang="ts">
+import { Profanease } from 'profanease';
+import en from 'profanease/langs/en';
+
+const filter = new Profanease({ languages: [en] });
 const reviewUpload = ref<string>('')
 const starRating = ref<number>(0)
+const errorMessage = ref<string>('')
+const reviewed = ref<boolean>(false)
+
+watch(() => reviewUpload.value, () => {
+    errorMessage.value = ""
+})
 
 function uploadReview(uploadPurpose:('assignment' | 'free')) {
-    console.log(reviewUpload.value, starRating.value)
-    starRating.value = 0
-    reviewUpload.value = ""
+    if(filter.check(reviewUpload.value)) {
+        errorMessage.value = "Do you kiss your mother with that mouth?"
+    } else if (!reviewUpload.value || !reviewed.value) {
+        errorMessage.value = "One or more empty fields."
+    } else {
+        starRating.value = 0
+        reviewUpload.value = ""
+    }
+    console.log(errorMessage.value)
 }
 </script>
 

@@ -24,8 +24,9 @@
 </template>
 
 <script setup lang="ts">
+const userStore = useUserStore()
 const emit = defineEmits(['select'])
-const userType = ref<("Admin" | "Student")>("Admin")
+const userType = userStore.userType
 </script>
 
 <style scoped></style>

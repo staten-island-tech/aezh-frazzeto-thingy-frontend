@@ -119,7 +119,7 @@ const viewingStudents = ref<boolean>(false)
 const courseName = ref<string>('English')
 const teacherName = ref<string>("Mrs. Peterson")
 const upcomingReview = ref<string | null>(null)
-const userRole = ref<'Admin' | 'Student'>('Admin')
+const userRole = useUserStore().userType
 const newClassNameInput = ref<string>("")
 const showClassCode = ref<boolean>(false)
 

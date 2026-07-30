@@ -35,7 +35,8 @@ for(let i of booleanArray) {
         user_id: '234',
         username: 'josephf123',
         name: 'Joseph Frazzetto',
-        enrolledClasses: []
+        enrolledClasses: [],
+        completedReviews: []
     })
 }
 

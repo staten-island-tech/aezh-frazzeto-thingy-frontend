@@ -8,7 +8,13 @@ export interface Book   {
     genre: string
     rating: number
     cover: string
-    book_id: string
+    book_id: string,
+}
+
+export interface assignedReview {
+    assigned_review_id: string,
+    course_id: string,
+    dueDate: string,
 }
 
 export interface Course {
@@ -16,7 +22,7 @@ export interface Course {
     courseName: string,
     classCode: string,
     teacherName: string,
-    nextAssignmentDueDate: string,
+    assignedReviews: assignedReview[],
     periodNumber: number,
 }
 
@@ -28,6 +34,7 @@ export interface User {
 
 export interface Student extends User {
     enrolledClasses: Course[]
+    completedReviews: assignedReview[]
 }
 
 export interface Review   {
