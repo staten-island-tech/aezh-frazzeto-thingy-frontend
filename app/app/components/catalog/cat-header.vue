@@ -69,7 +69,6 @@ import { useBookStore } from "~/stores/bookStore";
 const userType = ref<'Student' | 'Admin'>('Admin')
 
 const store = useBookStore();
-const books = store.Books;
 
 const addingBook = ref<boolean>(false);
 const newBookName = ref("");

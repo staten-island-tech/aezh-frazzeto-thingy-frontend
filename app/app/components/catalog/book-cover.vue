@@ -20,7 +20,7 @@
                 <catalog-stars-container :size="40" :stars="book.rating" class="w-full h-[15%]"></catalog-stars-container>
             </div>
              <button
-            class="shadow-sm forum text-2xl bg-white px-[5%] transition-all duration-300 ease-in-out hover:bg-sky-400/20 hover:-translate-y-px active:translate-y-0.5 text-black w-full rounded-full active:bg-sky-400/60 flex items-cetner justify-between"
+            class="shadow-sm hover:shadow-lg active:shadow-none forum text-2xl bg-white px-[5%] transition-all duration-300 ease-in-out hover:bg-sky-400/20 hover:-translate-y-px active:translate-y-0.5 text-black w-full rounded-full active:bg-sky-400/60 flex items-cetner justify-between"
             @click="async () => { await navigateTo(`/book/${book_id}`) }">
             <Eye :size="32" weight="Filled" :color="'#1d293d'"/> View More </button>
         </aside>
