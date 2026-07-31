@@ -2,7 +2,7 @@ import { defineStore } from "pinia";
 
 export const useBookStore = defineStore("books", {
   state: () => ({
-    Books: [
+    books: [
       {
         name: "Harry Potter and the Sorcerer's Stone",
         author: "JK Rowling",
@@ -22,15 +22,16 @@ export const useBookStore = defineStore("books", {
           "https://th.bing.com/th/id/R.2a2fc147729d23229f844c159b35611a?rik=1b40Uqxb%2fJvNIg&pid=ImgRaw&r=0",
       },
     ],
+    highlightedReviewId: 1
   }),
   actions: {
     addBook(newBook: { name: string; author: string; cover: string; genre: string }) {
       const book = {
         ...newBook,
         rating: 0,
-        id: this.Books.length + 1,
+        id: this.books.length + 1,
       };
-      this.Books.push(book);
+      this.books.push(book);
     }
   },
 });

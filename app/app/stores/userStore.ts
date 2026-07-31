@@ -2,7 +2,7 @@ export const useUserStore = defineStore('functions', {
     state: () => ({
         loggedIn: false as boolean,
         userType: "Student" as ("Student" | "Admin"), // by default to limit permissions
-        user: null as User | null,
+        user: null as AppUser | null,
     }),
     actions: {
         validatePassword(passwordChange: string): [string, boolean] {

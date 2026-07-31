@@ -26,24 +26,26 @@ export interface Course {
     periodNumber: number,
 }
 
-export interface User {
+export interface AppUser {
     user_id: string,
     username: string,
     name: string,
 }
 
-export interface Student extends User {
+export interface Student extends AppUser {
     enrolledClasses: Course[]
-    completedReviews: assignedReview[]
+    completedReviews: Review[]
 }
 
 export interface Review   {
     book_id: string,
+    book_name: string,
     user_id: string,
-    rating: number
+    rating: number,
+    review_content: string,
 }
 
-export interface Teacher   {
+export interface Admin extends AppUser  {
     enrolledClasses: Course[]
     ownedClasses: Course[]
 }
