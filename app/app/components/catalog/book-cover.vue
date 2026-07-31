@@ -17,7 +17,7 @@
             <p class="text-center text-2xl"> Genre: {{ book.genre ? book.genre : "None" }}</p>
             <div class="flex w-full items-center justify-center gap-2 px-5">
                 <p class="forum text-black text-2xl"> Rating: </p>
-                <catalog-stars-container :size="40" :stars="book.rating" class="w-full h-[15%]"></catalog-stars-container>
+                <catalog-stars-container :text-size="'text-2xl'" :size="40" :stars="book.rating" class="w-full h-[15%]"></catalog-stars-container>
             </div>
              <button
             class="shadow-sm hover:shadow-lg active:shadow-none forum text-2xl bg-white px-[5%] transition-all duration-300 ease-in-out hover:bg-sky-400/20 hover:-translate-y-px active:translate-y-0.5 text-black w-full rounded-full active:bg-sky-400/60 flex items-cetner justify-between"

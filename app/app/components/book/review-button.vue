@@ -1,12 +1,12 @@
 <template>
   <div ref="reviewContainer"
-    class="shadow-md bg-slate-200 w-full rounded-lg flex flex-col items-center justify-center m-[1%] transition-all duration-300 ease-in-out px-1">
+    class="shadow-md w-full rounded-lg flex flex-col items-center justify-center m-[1%] transition-all duration-300 ease-in-out px-1">
     <div class="flex flex-col items-center justify-center w-full p-2">
       <div class="w-full flex justify-between mx-2">
         <h2 class="forum text-xl max-w-full text-black text-left w-full">
-          {{ props.review.reviewer }}
+          {{ props.review.reviewer }} <slot></slot>
         </h2>
-        <catalog-stars-container :stars="props.review.rating" :size="24"></catalog-stars-container>
+        <catalog-stars-container :stars="props.review.rating" :size="24" :text-size="'text-xl'"></catalog-stars-container>
         <Trash2 @click="" color="black" :size="32" weight="Filled" class="hover:bg-red-400/20 active:bg-red-400/60 transition-all duration-300 ease-in-out rounded-full"/>
       </div>
       <h3 class="forum text-[0.875rem] text-black justify-center text-center">

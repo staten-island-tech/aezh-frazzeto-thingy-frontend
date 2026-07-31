@@ -16,7 +16,7 @@
 <script lang="ts" setup>
 import { useBookStore } from '#imports';
 const store = useBookStore()
-const books = store.Books;
+const books = store.books;
 </script>
 
 <style scoped></style>
