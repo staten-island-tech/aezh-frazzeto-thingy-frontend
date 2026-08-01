@@ -1,5 +1,5 @@
 <template>
-    <header class="sticky top-0 h-[7vh] border-b border-slate-800 bg-slate-100 flex justify-between items-center px-[2%] shadow-md" >
+    <header class="sticky top-0 h-[7vh] border-b border-slate-800 bg-slate-100 flex justify-between items-center px-[2%] shadow-md w-full mx-0!" >
         <h1 class="forum lg:text-2xl text-lg hover:underline font-bold text-black" v-if="userStore.loggedIn"
             @click="async () => { await navigateTo('/') }">SITHS Book Review</h1>
         <h1 class="forum text-center w-full lg:text-lg font-bold text-black" v-else> Welcome to SITHS Book Review!</h1>
@@ -18,7 +18,7 @@
     <transition name="options-modal">
         <index-options-modal v-if="showSettings && loggedIn" @close="showSettings = false"></index-options-modal>
     </transition>
-    <slot></slot>
+    <slot class="mx-0 w-full"></slot>
 </template>
 
 <script setup lang="ts">
