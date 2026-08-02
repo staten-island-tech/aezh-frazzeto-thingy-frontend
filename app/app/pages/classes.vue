@@ -19,6 +19,18 @@
 <script setup lang="ts">
 const selectedCourse = ref<null | Course>(null)
 const bodyMode = ref<null | 'join' | 'add'>(null)
+
+async function fetchCourses() {
+    try {
+        const response = await $fetch<Course[]>('/api/courses/', {
+            method: 'GET',
+        });
+        console.log('Fetched courses:', response);
+    } catch (error) {
+        console.error('Error fetching courses:', error);
+    }
+}
+fetchCourses()
 </script>
 
 <style scoped>

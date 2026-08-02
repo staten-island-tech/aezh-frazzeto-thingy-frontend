@@ -9,17 +9,18 @@ export default defineNuxtConfig({
   pages: true,
   app: {
     head: {
-      title: "SITHS Book Review"
-    }
+      title: "SITHS Book Review",
+    },
+  },
+  runtimeConfig: {
+    public: {
+      apiBase: "http://127.0.0.1:8000",
+    },
   },
   vite: {
     plugins: [tailwindcss()],
     optimizeDeps: {
-      include: [
-        '@vue/devtools-core',
-        '@vue/devtools-kit',
-        'reicon-vue',
-      ]
-    }
-  }
-})
+      include: ["@vue/devtools-core", "@vue/devtools-kit", "reicon-vue"],
+    },
+  },
+});
