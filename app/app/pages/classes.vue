@@ -17,7 +17,6 @@
 </template>
 
 <script setup lang="ts">
-const selectedCourse = ref<null | Course>(null)
 const bodyMode = ref<null | 'join' | 'add'>(null)
 
 async function fetchCourses() {
