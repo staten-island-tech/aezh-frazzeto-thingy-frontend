@@ -16,7 +16,7 @@
         </div>
     </header>
     <transition name="options-modal">
-        <index-options-modal v-if="showSettings && loggedIn" @close="showSettings = false"></index-options-modal>
+        <lazy-index-options-modal v-if="showSettings && loggedIn" @close="showSettings = false"></lazy-index-options-modal>
     </transition>
     <slot class="mx-0 w-full"></slot>
 </template>

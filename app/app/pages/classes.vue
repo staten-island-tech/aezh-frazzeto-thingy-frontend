@@ -2,17 +2,17 @@
     <div class="w-full px-[2%]">
         <classes-course-header @menu-click="(mode) => bodyMode = mode"></classes-course-header>
         <div class="carousel bg-slate-200 h-[70vh] mt-[3vh] p-[2%] gap-2 shadow-lg rounded-2xl w-full flex items-center">
-            <classes-course-carousel-item v-for="i in 9" :periodNumber="i" :isArchived="false"></classes-course-carousel-item>
+            <lazy-classes-course-carousel-item v-for="i in 9" :periodNumber="i" :isArchived="false"></lazy-classes-course-carousel-item>
         </div>
     </div>
     <transition name='highlight-background'>
         <div class="w-screen h-screen bg-taupe-700/40 fixed top-0 left-0" v-if="bodyMode === 'join' || bodyMode === 'add'"></div>
     </transition>
     <transition name="join-modal">
-        <classes-join-modal @close="bodyMode = null" v-if="bodyMode === 'join'"></classes-join-modal>
+        <lazy-classes-join-modal @close="bodyMode = null" v-if="bodyMode === 'join'"></lazy-classes-join-modal>
     </transition>
     <transition name="add-modal">
-        <classes-add-modal @close="bodyMode = null" v-if="bodyMode === 'add'"></classes-add-modal>
+        <lazy-classes-add-modal @close="bodyMode = null" v-if="bodyMode === 'add'"></lazy-classes-add-modal>
     </transition>
 </template>
 
