@@ -52,12 +52,20 @@
 </template>
 
 <script setup lang="ts">
+interface Review {
+  id: number;
+  Review: string;
+  reviewer: string;
+  rating: number;
+  [key: string]: unknown;
+}
+
 // Use of route is a temporary solution until I figure out how to pass the book_id from the catalog page to the book page.
 const route = useRoute();
 const book_id = route.params.book_id as string;
 
 const highlightedReviewId = useBookStore().highlightedReviewId;
-const Reviews = ref(async function fetchReviews() {
+async function fetchReviews() {
   try {
     const response = await fetch(
       `http://localhost:3000/api/reviews/?book=${book_id}`,
@@ -65,12 +73,17 @@ const Reviews = ref(async function fetchReviews() {
     if (!response.ok) {
       throw new Error("Failed to fetch reviews");
     }
-    const data = await response.json();
+    const data = (await response.json()) as Review[];
     return data;
   } catch (error) {
     console.error(error);
-    return [];
+    return [] as Review[];
   }
+}
+const Reviews = ref<Review[]>([]);
+
+onMounted(async () => {
+  Reviews.value = await fetchReviews();
 });
 </script>
 
