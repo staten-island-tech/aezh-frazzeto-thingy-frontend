@@ -44,7 +44,9 @@
 <script setup lang="ts">
 import { Profanease, Category } from 'profanease';
 import en from 'profanease/langs/en';
-
+const prop = defineProps<{
+    book_id: number
+}>()
 const filter = new Profanease({
   languages: [en],
   normalize: 'aggressive',
@@ -61,7 +63,10 @@ watch(() => reviewUpload.value, () => {
     errorMessage.value = ""
 })
 
-function uploadReview(uploadPurpose: ('assignment' | 'free')) {
+const config = useRuntimeConfig()
+const userStore = useUserStore()
+
+async function uploadReview(uploadPurpose: ('assignment' | 'free')) {
     if (filter.check(reviewUpload.value)) {
         errorMessage.value = "Do you kiss your mother with that mouth?"
     } else if (!reviewUpload.value || !reviewed.value) {
@@ -69,8 +74,23 @@ function uploadReview(uploadPurpose: ('assignment' | 'free')) {
     } else {
         starRating.value = 0
         reviewUpload.value = ""
+        try {
+            const response = await $fetch(`${config.public.apiBase}/api/books/`, {
+            method: "GET",
+            headers: {
+                Authorization: `Bearer ${userStore.accessToken}`,
+            },
+            query: {
+                book: prop.book_id,
+                stars: starRating.value,
+                textReview: reviewUpload.value
+            }
+        })
+        console.log("hi")
+        } catch (error) {
+            console.error(error)
+        } 
     }
-    console.log(errorMessage.value)
 }
 </script>
 

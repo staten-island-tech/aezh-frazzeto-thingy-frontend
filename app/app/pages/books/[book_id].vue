@@ -19,7 +19,7 @@
           <catalog-stars-container
             :text-size="'text-2xl'"
             :size="32"
-            :stars="3"
+            :stars="book.rating"
             class="w-[30%] h-full"
           ></catalog-stars-container>
         </div>
@@ -27,7 +27,7 @@
         <div
           class="w-full h-[90%] flex flex-col gap-2 items-center overflow-y-scroll"
         >
-          <book-review-editor></book-review-editor>
+          <book-review-editor :book_id="book.id"></book-review-editor>
           <!--We need a way to get review ids-->
           <book-review-button
             v-for="review in Reviews"
@@ -90,7 +90,7 @@ const highlightedReviewId = useBookStore().highlightedReviewId;
 async function fetchReviews() {
   try {
     const response = await fetch(
-      `http://localhost:3000/api/reviews/?book=${book_id}`,
+      `${config}/api/reviews/?book=${book_id}`,
     );
     if (!response.ok) {
       throw new Error("Failed to fetch reviews");
