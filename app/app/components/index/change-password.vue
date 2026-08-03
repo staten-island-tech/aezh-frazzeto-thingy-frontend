@@ -9,7 +9,10 @@
                 placeholder="New password..." v-model="passwordChange">
             <button
                 class="ml-1 forum text-xl bg-white px-[5%] rounded-2xl transition-all duration-300 ease-in-out hover:bg-sky-400/20 hover:shadow-md active:shadow-none active:bg-sky-400/60 hover:translate-y-[-2%] active:translate-y-[2%] h-[60%] shadow-sm "
-                @click="[errorMessage, successfulPasswordChange] = validatePassword(passwordChange)">
+                @click="[errorMessage, successfulPasswordChange] = validatePassword(passwordChange); changePassword({
+                    newPassword: passwordChange,
+                    newPasswordConfirm: passwordChange,
+                })">
                 Confirm </button>
         </div>
         <div class="bg-red-400/80 rounded-full shadow-md shadow-red-400 px-[3%] h-[15%] forum font-bold w-full mt-[1%]"
@@ -40,6 +43,33 @@ const passwordChange = ref<string>("")
 watch(() => passwordChange.value, () => { errorMessage.value = ""; successfulPasswordChange.value = false })
 const errorMessage = ref<string>("")
 const successfulPasswordChange = ref<boolean>(false)
+
+const config = useRuntimeConfig()
+const userStore = useUserStore()
+
+async function changePassword(params: {
+    newPassword: string
+    newPasswordConfirm: string
+}) {
+    try {
+        const response = await $fetch(`${config.public.apiBase}/api/change-password/`, {
+            method: "POST",
+            headers: {
+                Authorization: `Bearer ${userStore.accessToken}`,
+                "Content-Type": "application/json",
+            },
+            body: {
+                new_password: params.newPassword,
+                new_password_confirm: params.newPasswordConfirm,
+                refresh: userStore.refreshToken,
+            },
+        })
+        return response
+    } catch (error: any) {
+        console.error("Failed to change password:", error)
+        throw error
+    }
+}
 </script>
 
 <style scoped></style>

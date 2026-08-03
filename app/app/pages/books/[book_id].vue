@@ -1,20 +1,20 @@
 <template>
   <div class="h-dvh px-[1%] flex flex-col items-center justify-center">
-    <book-bk-header :book-title="'Book Title'"></book-bk-header>
+    <book-bk-header :book-title="`${book.title} - written by ${book.author.name}`"></book-bk-header>
     <div
       class="w-full h-[70vh] p-2 bg-slate-200 shadow-md mt-[3vh] rounded-lg flex md:flex-row flex-col items-center justify-between gap-2 overflow-y-scroll"
     >
     <!-- Please someone replace the placeholder image so it shows the correct book cover same thing with the rest of the book's details-->
       <img
         class="h-[50%] lg:h-[95%] shadow-lg shadow-slate-500 rounded-2xl"
-        src="https://m.media-amazon.com/images/I/51Ppi-8kISL._SY445_SX342_QL70_FMwebp_.jpg"
+        :src="book.img"
       />
       <div
         class="bg-white h-full rounded-2xl w-[80%] lg:w-[60%] p-2 flex flex-col items-center"
       >
         <div class="flex justify-between px-[3] items-center h-[7%] w-full">
           <h4 class="forum text-lg lg:text-2xl text-black font-bold w-[65%]">
-            Book Title - Book Genre
+            {{book.title}} - {{book.genre}}
           </h4>
           <catalog-stars-container
             :text-size="'text-2xl'"
@@ -63,6 +63,28 @@ interface Review {
 // Use of route is a temporary solution until I figure out how to pass the book_id from the catalog page to the book page.
 const route = useRoute();
 const book_id = route.params.book_id as string;
+
+const config = useRuntimeConfig()
+const userStore = useUserStore()
+
+async function searchForBook(params: { id?: number } = {}) {
+    try {
+        const response = await $fetch(`${config.public.apiBase}/api/books/`, {
+            method: "GET",
+            headers: {
+                Authorization: `Bearer ${userStore.accessToken}`,
+            },
+            query: params,
+        })
+        return (response as any).results[0]
+    } catch (error) {
+        console.error("Failed to fetch book:", error)
+        throw error
+    }
+}
+
+const book = await (searchForBook() as any)
+
 
 const highlightedReviewId = useBookStore().highlightedReviewId;
 async function fetchReviews() {

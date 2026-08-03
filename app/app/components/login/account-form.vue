@@ -123,8 +123,11 @@ async function logIn() {
     );
 
     userStore.loginSuccess(response.access, response.refresh, email.value, props.userType);
+    localStorage.setItem("refreshToken", response.refresh)
+    localStorage.setItem("accessToken", response.access)
     navigateTo("/");
   } catch (error) {
+    console.error(error)
     errorMessage.value = "Invalid email or password.";
   }
 }

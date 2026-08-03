@@ -23,7 +23,7 @@
 import { X } from 'reicon-vue';
 const emit = defineEmits(['close'])
 const classCodeInput = ref<string>("")
-
+console.log(localStorage.getItem("accessToken"))
 const wobbling = ref<boolean>(false)
 async function verifyClassCode() {
     const valid = ref<boolean>(false)
