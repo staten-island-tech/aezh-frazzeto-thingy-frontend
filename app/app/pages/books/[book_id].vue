@@ -30,7 +30,7 @@
           <book-review-editor :book_id="book.id"></book-review-editor>
           <!--We need a way to get review ids-->
           <book-review-button
-            v-for="review in Reviews"
+            v-for="review in reviews"
             :review="review"
             :class="
               review.id === highlightedReviewId
@@ -47,11 +47,17 @@
           </book-review-button>
         </div>
       </div>
+      <div class="bg-white absolute lg:w-[40%] w-[60%] h-[10%] lg:left-[30%] left-[20%] rounded-2xl bottom-2 shadow-md flex justify-between items-center px-2">
+        <button class="bg-slate-200 aspect-square h-[80%] rounded-2xl flex items-center justify-center shadow-sm hover:shadow-md hover:bg-slate-300 active:shadow-none active:bg-sky-400/60 transition-all duration-300 ease-in-out" @click="paginationInteract(-1)"> <ArrowLeft :size="24" :color="'black'"/> </button>
+        <p class="text-2xl forum text-black"> Pg. {{ currentPageNum }} </p>
+        <button class="bg-slate-200 aspect-square h-[80%] rounded-2xl flex items-center justify-center shadow-sm hover:shadow-md hover:bg-slate-300 active:shadow-none active:bg-sky-400/40 transition-all duration-300 ease-in-out" @click="paginationInteract(1)"> <ArrowRight :size="24" :color="'black'"/> </button>
+      </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import {ArrowLeft, ArrowRight } from 'reicon-vue'
 interface Review {
   id: number;
   Review: string;
@@ -60,9 +66,13 @@ interface Review {
   [key: string]: unknown;
 }
 
+const currentPageNum = ref<number>(1)
+const showReviews = ref<boolean>(true)
+
+
 // Use of route is a temporary solution until I figure out how to pass the book_id from the catalog page to the book page.
 const route = useRoute();
-const book_id = route.params.book_id as string;
+const book_id = parseInt(route.params.book_id as string) || 1;
 
 const config = useRuntimeConfig()
 const userStore = useUserStore()
@@ -83,29 +93,43 @@ async function searchForBook(params: { id?: number } = {}) {
     }
 }
 
-const book = await (searchForBook() as any)
+const book = await (searchForBook({id: book_id}))
 
+const totalPageCount = ref(1)
 
 const highlightedReviewId = useBookStore().highlightedReviewId;
-async function fetchReviews() {
-  try {
-    const response = await fetch(
-      `${config}/api/reviews/?book=${book_id}`,
-    );
-    if (!response.ok) {
-      throw new Error("Failed to fetch reviews");
+
+async function fetchReviews(params: { book: number, page: number }) {
+    try {
+        const response: any = await $fetch(`${config.public.apiBase}/api/review/`, {
+            method: "GET",
+            headers: {
+                Authorization: `Bearer ${userStore.accessToken}`,
+            },
+            query: params
+        })
+        totalPageCount.value = Math.ceil(response.count / 3)
+        return response.results as Review[]
+    } catch (error) {
+        console.error(error)
+        return [] as Review[]
     }
-    const data = (await response.json()) as Review[];
-    return data;
-  } catch (error) {
-    console.error(error);
-    return [] as Review[];
-  }
 }
-const Reviews = ref<Review[]>([]);
+
+async function paginationInteract(modify: number) {
+    currentPageNum.value = Math.min(Math.max(1, currentPageNum.value + modify), totalPageCount.value)
+    showReviews.value = false
+
+    reviews.value = await fetchReviews({ book: book_id, page: currentPageNum.value })
+
+    await nextTick()
+    showReviews.value = true
+}
+
+const reviews = ref<Review[]>([]);
 
 onMounted(async () => {
-  Reviews.value = await fetchReviews();
+  reviews.value = await fetchReviews({book: book_id, page: currentPageNum.value});
 });
 </script>
 
