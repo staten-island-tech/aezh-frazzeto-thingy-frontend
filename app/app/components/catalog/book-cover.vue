@@ -6,7 +6,7 @@
     />
     <div v-else @click="isSelected = !isSelected"
     class="absolute w-full h-full object-cover rounded-lg z-0 shadow-sm hover:shadow-lg active:shadow-none hover:scale-[1.03] hover:-translate-y-2 shadow-slate-600 active:translate-y-1 transition-all duration-300 ease-in-out active:scale-[0.97] bg-linear-to-tr from-sky-300 to-white flex justify-center items-center">
-        NO COVER :(
+        NO COVER D:
     </div>
     <transition name="slide-fade">
         <aside class="absolute bg-white h-full w-[150%] translate-x-[18vw] rounded-lg shadow-lg p-2 shadow-slate-600 z-1 flex flex-col justify-between py-4" v-if="isSelected">
