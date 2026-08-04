@@ -44,13 +44,15 @@
 <script setup lang="ts">
 import { Profanease, Category } from 'profanease';
 import en from 'profanease/langs/en';
-
+const prop = defineProps<{
+    book_id: number
+}>()
 const filter = new Profanease({
-  languages: [en],
-  normalize: 'aggressive',
-  categories: [Category.SLUR, Category.SEXUAL],
-  // if you wish, you can have Category. INSULT, PROFANITY, RELIGIOUS, DRUGS, and VIOLENCE,
-  // however i assume that some books will cover these topics naturally so i excluded them 
+    languages: [en],
+    normalize: 'aggressive',
+    categories: [Category.SLUR, Category.SEXUAL],
+    // if you wish, you can have Category. INSULT, PROFANITY, RELIGIOUS, DRUGS, and VIOLENCE,
+    // however i assume that some books will cover these topics naturally so i excluded them 
 });
 const reviewUpload = ref<string>('')
 const starRating = ref<number>(0)
@@ -61,16 +63,54 @@ watch(() => reviewUpload.value, () => {
     errorMessage.value = ""
 })
 
-function uploadReview(uploadPurpose: ('assignment' | 'free')) {
+console.log(prop.book_id)
+
+const config = useRuntimeConfig()
+const userStore = useUserStore()
+
+async function uploadReview(uploadPurpose: ('assignment' | 'free')) {
     if (filter.check(reviewUpload.value)) {
         errorMessage.value = "Do you kiss your mother with that mouth?"
     } else if (!reviewUpload.value || !reviewed.value) {
         errorMessage.value = "One or more empty fields."
     } else {
-        starRating.value = 0
-        reviewUpload.value = ""
+        try {
+            if (uploadPurpose === 'free') {
+                const response = await $fetch(`${config.public.apiBase}/api/review/`, {
+                    method: "POST",
+                    headers: {
+                        Authorization: `Bearer ${userStore.accessToken}`,
+                    },
+                    body: {
+                        book: prop.book_id,
+                        stars: starRating.value,
+                        textReview: reviewUpload.value
+                    }
+                })
+                console.log("hi")
+                console.log(response)
+            } else if (uploadPurpose === 'assignment' && false) {
+                const response = await $fetch(`${config.public.apiBase}/api/reviews/`, {
+                    method: "POST",
+                    headers: {
+                        Authorization: `Bearer ${userStore.accessToken}`,
+                    },
+                    query: {
+                        book: prop.book_id,
+                        stars: starRating.value,
+                        textReview: reviewUpload.value,
+                        assignment: 0
+                    }
+                })
+            }
+        } catch (error: any) {
+            console.log("FULL ERROR OBJECT:", error)
+            console.log("ERROR DATA:", error?.data)
+            console.log("ERROR RESPONSE:", error?.response)
+        }
     }
-    console.log(errorMessage.value)
+    starRating.value = 0
+    reviewUpload.value = ""
 }
 </script>
 

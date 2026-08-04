@@ -23,7 +23,7 @@
           class="w-[60%] bg-white/60 shadow-md min-h-[80%] py-2 rounded-2xl focus:shadow-lg border-0 focus:bg-white trnasition-all duration-300 ease-in-out focus:outline-none px-2 placeholder-slate-400 forum text-black"
           placeholder="Search for a book.">
         </input>
-        <button @click="" class="bg-slate-500 text-white forum rounded-2xl px-2 hover:bg-slate-700 hover:-translate-y-0.5 active:bg-slate-900 active:translate-y-px transition-all duration-300 shadow-md hover:shadow-lg active:shadow-none py-2">
+        <button @click="searchForBooks({title:searchInput})" class="bg-slate-500 text-white forum rounded-2xl px-2 hover:bg-slate-700 hover:-translate-y-0.5 active:bg-slate-900 active:translate-y-px transition-all duration-300 shadow-md hover:shadow-lg active:shadow-none py-2">
           Search
         </button>
       </div>
@@ -61,6 +61,8 @@ import { Add } from 'reicon-vue';
 import { X } from 'reicon-vue';
 import { useBookStore } from "~/stores/bookStore";
 
+const emit = defineEmits(['returnSearch'])
+
 const userType = ref<'Student' | 'Admin'>('Admin')
 
 const store = useBookStore();
@@ -81,8 +83,24 @@ function submitBook() {
   }); // POST THIS
 }
 
-function searchForBooks() {
+const config = useRuntimeConfig()
+const userStore = useUserStore()
+
+async function searchForBooks(params: { title?: string } = {}) {
   
+    try {
+        const response = await $fetch(`${config.public.apiBase}/api/books/`, {
+            method: "GET",
+            headers: {
+                Authorization: `Bearer ${userStore.accessToken}`,
+            },
+            query: params,
+        })
+        emit('returnSearch', (response as any).results, (response as any).count)
+    } catch (error) {
+        console.error("Failed to fetch books:", error)
+        throw error
+    }
 }
 </script>
 
