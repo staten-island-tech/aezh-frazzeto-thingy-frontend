@@ -33,40 +33,25 @@ import { X } from 'reicon-vue';
 const emit = defineEmits(['close'])
 const courseName = ref<string>("")
 const periodsInput = ref<boolean[]>([false, false, false, false, false, false, false, false, false])
+const config = useRuntimeConfig()
+const userStore = useUserStore()
 
-function generateRandomClassCode(): string {
-    let classCode = ""
-    let charactersGenerated = 0
-    const chars = "QWERTYUIOPASDFGHJKLZXCVBNM1234567890"
-
-    while (charactersGenerated < 9) {
-        if (charactersGenerated === 4) {
-            classCode += "-"
+async function createNewClass() {
+    periodsInput.value.forEach(async (period, index) => {
+        if (period) {
+            const response: any = await $fetch(`${config.public.apiBase}/api/courses/`, {
+                method: "POST",
+                headers: {
+                    Authorization: `Bearer ${userStore.accessToken}`,
+                },
+                body: { 
+                    "name": courseName.value,
+                    "period": index + 1
+                 }
+            })
         }
-        else {
-            classCode += chars.charAt(Math.floor(Math.random() * chars.length));
-        }
-        charactersGenerated++
     }
-    return classCode
-}
-
-function createNewClass() {
-    let coursesCreated: Course[] = []
-    periodsInput.value.forEach((value: boolean, index: number) => {
-        if (value) {
-            coursesCreated.push({
-                course_id: "uid",
-                courseName: courseName.value,
-                classCode: generateRandomClassCode(),
-                teacherName: "Teacher Name",
-                nextAssignmentDueDate: "woah",
-                periodNumber: index + 1,
-                assignedReviews: []
-            } as Course)
-        }
-    })
-    console.log(coursesCreated) // UPLOAD TO DB
+    )
 }
 </script>
 

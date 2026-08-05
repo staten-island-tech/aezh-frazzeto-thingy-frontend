@@ -8,16 +8,48 @@
                     View Catalog </button>
 
         </div>
-        <div class="carousel h-full rounded-2xl mt-[2%]">
-            <div class="h-[80%] bg-slate-200 border border-slate-300 min-w-[30%] p-[2%] carousel-item text-black" v-for="i in [0, 1, 2, 3, 4, 5, 6, 7]" loading="lazy">
-                sample book cover change this to an img tag when its time
+        <div class="carousel h-full rounded-2xl mt-[2%] gap-2 px-2">
+            <div class="h-[95%] bg-white p-[0.5%] carousel-item text-black rounded-lg flex justify-between gap-1 px-2 shadow-lg overflow-hidden w-80 relative" v-for="featuredBook in featuredBooks" loading="lazy">
+               <img :src="featuredBook.img" class="rounded-lg aspect-1/2">
+               <div class="flex flex-col min-w-[50%] w-full over">
+                <h3 class="forum text-lg text-center font-bold">{{ featuredBook.title }}</h3>
+                <div class="w-full min-h-1 bg-slate-800 rounded-full"></div>
+                <div class="w-full flex flex-col items-center min-h-[70%] justify-around">
+                    <h3 class="forum text-lg text-center font-bold">{{ featuredBook.genre }}</h3>
+                    <catalog-stars-container :stars="featuredBook.averageRating || 0" :text-size="'text-2xl'" :size="48" ></catalog-stars-container>
+                    <NuxtLink :to="`/books/${featuredBook.id}`" class="bg-slate-100 shadow-md hover:shadow-lg active:shadow-none w-[55%] py-2 rounded-lg
+                    hover:bg-sky-400/20 active:bg-sky-400/60 transition-all duration-300 ease-in-out hover:-translate-y-0.5 active:translate-y-px flex items-center justify-center
+                    forum font-bold absolute bottom-2">See More</NuxtLink>
+                </div>
+               </div>
             </div>
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
+const featuredBooks = ref<any[]>()
 
+const config = useRuntimeConfig()
+const userStore = useUserStore()
+async function searchFeatured() {
+  try {
+        const response = await $fetch(`${config.public.apiBase}/api/books/`, {
+            method: "GET",
+            headers: {
+                Authorization: `Bearer ${userStore.accessToken}`,
+            },
+            query: {
+              featured: true
+            },
+        })
+        featuredBooks.value = (response as any).results
+    } catch (error) {
+        console.error("Failed to fetch books:", error)
+        throw error
+    }
+}
+await searchFeatured()
 </script>
 
 <style scoped>

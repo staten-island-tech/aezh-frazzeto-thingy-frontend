@@ -55,10 +55,9 @@ const bookCover = ref<HTMLElement | null>()
 const slideClass = computed(() => {
     if (bookCover.value) {
         const rect = bookCover.value.getBoundingClientRect()
-        const container = bookCover.value.parentElement // adjust if the scroll container isn't the direct parent
+        const container = bookCover.value.parentElement 
         const containerRect = container?.getBoundingClientRect()
         const spaceOnRight = (containerRect?.right ?? window.innerWidth) - rect.right
-        const asideWidth = rect.width * 1.5 // matches your md:w-[150%] estimate
         if (spaceOnRight < (.5 * (containerRect?.right || 1000))) {
             return "slide-fade-right"
         }

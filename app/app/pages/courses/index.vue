@@ -3,7 +3,7 @@
         <classes-course-header @menu-click="(mode) => bodyMode = mode"></classes-course-header>
         <div v-if="courses"
             class="carousel bg-slate-200 h-[70vh] mt-[3vh] p-[2%] gap-2 shadow-lg rounded-2xl w-full flex items-center">
-            <lazy-classes-course-carousel-item v-for="course in courses" :course=course></lazy-classes-course-carousel-item>
+            <lazy-classes-course-carousel-item v-for="course in courses" :course="course"></lazy-classes-course-carousel-item>
         </div>
     </div>
     <transition name='highlight-background'>
@@ -32,9 +32,16 @@ async function fetchCourses() {
                 Authorization: `Bearer ${userStore.accessToken}`,
             },
         });
-        return response
+
+        if (!response.ok) {
+            throw new Error(`Failed to fetch courses: ${response.status} ${response.statusText}`);
+        }
+
+        const classes = await response.json();
+        return classes;
     } catch (error) {
         console.error('Error fetching courses:', error);
+        throw error; 
     }
 }
 

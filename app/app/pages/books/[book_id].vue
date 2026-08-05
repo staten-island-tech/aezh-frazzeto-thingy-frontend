@@ -102,7 +102,6 @@ async function paginationInteract(modify: number) {
 }
 
 async function getRating() {
-  console.log('hello')
   try {
     const response: any = await $fetch(`${config.public.apiBase}/api/books/`, {
       method: "GET",
@@ -112,8 +111,8 @@ async function getRating() {
       query: {id: book_id}
     })
 
-    bookRating.value = response.results[0].averageRating.toFixed(1)
-    return response[0].averageRating.toFixed(1)
+
+    bookRating.value = response.results[0].averageRating
   } catch (error) {
     console.error(error)
     return 0

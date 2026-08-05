@@ -37,23 +37,6 @@ const emit = defineEmits(['close'])
 
 const students = ref<Student[]>([])
 
-const booleanArray: boolean[] = [true, false, true, true, false, true, true, false, true, true, false, true]
-for (let i of booleanArray) {
-    students.value.push({
-        user_id: '234',
-        username: 'josephf123',
-        name: 'Joseph Frazzetto',
-        enrolledClasses: [],
-        completedReviews: [{
-            book_id: 'string',
-            book_name: 'String Theory for Babies',
-            user_id: 'Stringy',
-            rating: 5,
-            review_content: 'This book is kinda bad.',
-        }]
-    })
-}
-
 </script>
 
 <style scoped></style>
