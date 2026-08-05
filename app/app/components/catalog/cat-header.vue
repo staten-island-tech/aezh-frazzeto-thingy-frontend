@@ -6,7 +6,11 @@
           Catalog
         </h2>
       </div>
-      <div class="flex gap-2 w-[60%] justify-between items-center">
+      <div class="flex gap-2 w-[80%] justify-between items-center">
+          <button @click="searchFeatured(); showFeatured = !showFeatured" class="forum rounded-2xl px-2 font-bold hover:-translate-y-0.5 active:translate-y-px transition-all duration-300 shadow-md hover:shadow-lg active:shadow-none py-2 mr-5"
+          :class="showFeatured ? 'bg-yellow-400 hover:bg-yellow-500 active:bg-amber-500 text-black' : 'text-white hover:bg-slate-700 active:bg-slate-900 bg-slate-500'">
+            Show {{ showFeatured ? 'All Books' : 'Featured' }}
+          </button>
         <div class="flex gap-2 items-center forum text-black font-bold text-lg">
           <div v-if="userType === 'Admin' && !addingBook" class="flex items-center gap-2">
             <Add @click="addingBook = !addingBook" :size="40" color="black"
@@ -61,9 +65,10 @@ import { Add } from 'reicon-vue';
 import { X } from 'reicon-vue';
 import { useBookStore } from "~/stores/bookStore";
 
-const emit = defineEmits(['returnSearch'])
+const emit = defineEmits(['returnSearch', 'featuredSearch'])
 
 const userType = ref<'Student' | 'Admin'>('Admin')
+const showFeatured = ref<boolean>(false)
 
 const store = useBookStore();
 
@@ -97,6 +102,25 @@ async function searchForBooks(params: { title?: string } = {}) {
             query: params,
         })
         emit('returnSearch', (response as any).results, (response as any).count)
+    } catch (error) {
+        console.error("Failed to fetch books:", error)
+        throw error
+    }
+}
+
+async function searchFeatured() {
+  try {
+        const response = await $fetch(`${config.public.apiBase}/api/books/`, {
+            method: "GET",
+            headers: {
+                Authorization: `Bearer ${userStore.accessToken}`,
+            },
+            query: {
+              featured: true
+            },
+        })
+        console.log(response)
+        emit('featuredSearch', (response as any).results)
     } catch (error) {
         console.error("Failed to fetch books:", error)
         throw error

@@ -1,13 +1,13 @@
 <template>
-    <div class="shadow-md h-[94%] w-[40vw]! rounded-2xl p-4 carousel-item flex flex-col mx-2 overflow-y-scroll" :class="isArchived ? 'bg-sky-100' : 'bg-white'">
-        <h3 class="text-slate-800 forum text-2xl text-center font-black">{{ teacherName }}'s {{ courseName }}, Period {{
-            prop.periodNumber }}</h3>
-        <p class="text-lg italic forum text-slate-600 text-center">your role: {{ userRole }}</p>
+    <div class="shadow-md h-[94%] w-[40vw]! rounded-2xl p-4 carousel-item flex flex-col mx-2 overflow-y-scroll" :class="true ? 'bg-sky-100' : 'bg-white'">
+        <h3 class="text-slate-800 forum text-2xl text-center font-black">{{ 'TEACHERNAME HERE' }}'s {{ 'COURSENAME HERE' }}, Period {{
+            '1' }}</h3>
+        <p class="text-lg italic forum text-slate-600 text-center">your role: {{ useUserStore().userType }}</p>
         <div class="h-1 rounded-full bg-slate-800 my-2"></div>
         <div v-if="upcomingReview"
             class="h-[64%] w-full flex justify-center items-center bg-red-200 shadow-md rounded-2xl shadow-red-400/40 p-2">
             <p class="forum text-2xl text-black font-bold m-2 text-center"> You have an upcoming review that you must
-                complete by <span class="text-red-900 text-4xl">{{ upcomingReview }}</span>.</p>
+                complete by <span class="text-red-900 text-4xl">{{ 'UPCOMINGREVIEW HERE' }}</span>.</p>
             <div class="h-1 rounded-full bg-slate-800 my-2"></div>
         </div>
         <div v-else-if="userRole === 'Student'"
@@ -31,7 +31,7 @@
                     
                 </button>
                 </div>
-                <button v-if="!isArchived"
+                <button v-if="placeholderBool"
                     class="w-full gap-2 px-4 bg-white shadow-sm rounded-2xl min-h-10 flex justify-between items-center text-black forum text-left my-1">
                     New Review Due
                     <input v-model="newDateM" type="number" placeholder="MM" maxlength="2" class="bg-slate-100 rounded-lg text-center focus:outline-none shadow-xs focus:shadow-md transition-all duration-300 ease-in-out text-sm px-0.5 w-[10%]
@@ -53,7 +53,7 @@
                     View Students
                     <User :size="24" />
                 </button>
-                <button v-if="!isArchived"
+                <button v-if="placeholderBool"
                     class="w-full gap-2 px-4 bg-white shadow-sm rounded-2xl min-h-10 flex justify-between items-center text-black forum text-left my-1">
                     Edit Class Name
                     <input v-model="newClassNameInput" type="text" placeholder="New Name..." maxlength="35" class="bg-slate-100 rounded-lg text-center focus:outline-none shadow-xs focus:shadow-md transition-all duration-300 ease-in-out text-sm px-0.5 w-[50%]
@@ -69,7 +69,7 @@
                     Delete Class
                     <Trash2 :size="24" />
                 </button>
-                <button v-if="!isArchived"
+                <button v-if="placeholderBool"
                     class="transition-all duration-300 ease-in-out shadow-sm min-h-10 flex justify-between px-4 items-center rounded-2xl text-black forum hover:shadow-lg active:translate-y-1 hover:-translate-y-0.5 hover:bg-sky-400/20 active:bg-sky-400/60 active:shadow-none gap-2 w-full">
                     Archive Class
                     <ArchiveDown2 :size="24" />
@@ -79,7 +79,7 @@
                 <ArrowDoorIn :size="24" />
                     Leave Class
             </button>
-            <h2 v-if="isArchived" class="forum text-black italic text-center text-lg mt-1 -mb-1">This class is archived.</h2>
+            <h2 v-if="placeholderBool" class="forum text-black italic text-center text-lg mt-1 -mb-1">This class is archived.</h2>
         </div>
         <transition name="highlight-background">
             <div class="w-screen h-screen bg-taupe-700/40 fixed top-0 left-0" v-if="viewingStudents || showClassCode"></div>
@@ -105,9 +105,10 @@
 import { Trash2, ArchiveDown2, User, ArrowDoorIn, Pen, Add, Screencast2, X } from 'reicon-vue';
 
 const prop = defineProps<{
-    periodNumber: number
-    isArchived: boolean
+    course: Object
 }>()
+
+const placeholderBool = false
 
 const newDateM = ref<number | null>(null)
 const newDateD = ref<number | null>(null)

@@ -9,7 +9,7 @@
                 placeholder="New password..." v-model="passwordChange">
             <button
                 class="ml-1 forum text-xl bg-white px-[5%] rounded-2xl transition-all duration-300 ease-in-out hover:bg-sky-400/20 hover:shadow-md active:shadow-none active:bg-sky-400/60 hover:translate-y-[-2%] active:translate-y-[2%] h-[60%] shadow-sm "
-                @click="[errorMessage, successfulPasswordChange] = validatePassword(passwordChange); changePassword({
+                @click="validatePassword(passwordChange); changePassword({
                     newPassword: passwordChange,
                     newPasswordConfirm: passwordChange,
                 })">
@@ -27,16 +27,40 @@
 </template>
 
 <script setup lang="ts">
-function validatePassword(passwordChange: string): [string, boolean] {
-            if (passwordChange.length === 0) return ["Empty password field.", false]
-            else if (passwordChange.length < 8) return ["Password must be at least 8 characters.", false]
-            else if (passwordChange.length > 50) return ["Password must be at most 50 characters.", false]
-            else if (!(/[0123456789]/.test(passwordChange))) return ["Password must contain at least one number.", false]
-            else if (!(/[!@#$%^&*():;,<.>/?]/.test(passwordChange))) return ["Password must contain at least one symbol.", false]
-            else if ((/ /.test(passwordChange))) return ["Password cannot contain spaces.", false]
-            else if (!(/[qwertyuiopasdfghjklzxcvbnm]/.test(passwordChange) && /[QWERTYUIOPASDFGHJKLZXCVBNM]/.test(passwordChange))) return ["Password requires one capital and one lowercase letter.", false]
-            else return ["", true]
-        }
+function validatePassword(passwordChange: string): [string, boolean] | void {
+    if (passwordChange.length === 0) {
+        errorMessage.value = "Empty password field."
+        return
+    }
+    else if (passwordChange.length < 8) {
+        errorMessage.value = "Password must be at least 8 characters."
+        return
+    }
+    else if (passwordChange.length > 50) {
+        errorMessage.value = "Password must be at most 50 characters."
+        return
+    }
+    else if (!(/[0123456789]/.test(passwordChange))) {
+        errorMessage.value = "Password must contain a number."
+        return
+    }
+    else if (!(/[!@#$%^&*():;,<.>/?]/.test(passwordChange))) {
+        errorMessage.value = "Password must contain a symbol."
+        return
+    }
+    else if ((/ /.test(passwordChange))) {
+        errorMessage.value = "Password cannot contain spaces."
+        return
+    }
+    else if (!(/[qwertyuiopasdfghjklzxcvbnm]/.test(passwordChange) && /[QWERTYUIOPASDFGHJKLZXCVBNM]/.test(passwordChange))) {
+        errorMessage.value = "Password must contain a lowercase and uppercase letter."
+        return
+    }
+    else changePassword({
+        newPassword: passwordChange,
+        newPasswordConfirm: passwordChange
+    })
+}
 const functionStore = useFunctionStore()
 
 const passwordChange = ref<string>("")
@@ -51,23 +75,26 @@ async function changePassword(params: {
     newPassword: string
     newPasswordConfirm: string
 }) {
-    try {
-        const response = await $fetch(`${config.public.apiBase}/api/change-password/`, {
-            method: "POST",
-            headers: {
-                Authorization: `Bearer ${userStore.accessToken}`,
-                "Content-Type": "application/json",
-            },
-            body: {
-                new_password: params.newPassword,
-                new_password_confirm: params.newPasswordConfirm,
-                refresh: userStore.refreshToken,
-            },
-        })
-        return response
-    } catch (error: any) {
-        console.error("Failed to change password:", error)
-        throw error
+    if (!errorMessage.value) {
+        try {
+            const response = await $fetch(`${config.public.apiBase}/api/change-password/`, {
+                method: "POST",
+                headers: {
+                    Authorization: `Bearer ${userStore.accessToken}`,
+                    "Content-Type": "application/json",
+                },
+                body: {
+                    new_password: params.newPassword,
+                    new_password_confirm: params.newPasswordConfirm,
+                    refresh: userStore.refreshToken,
+                },
+            })
+            console.log(response)
+            successfulPasswordChange.value = true
+        } catch (error: any) {
+            errorMessage.value = "Error occured while processing password change."
+            throw error
+        }
     }
 }
 </script>

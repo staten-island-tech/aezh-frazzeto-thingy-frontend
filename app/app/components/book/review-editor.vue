@@ -63,8 +63,6 @@ watch(() => reviewUpload.value, () => {
     errorMessage.value = ""
 })
 
-console.log(prop.book_id)
-
 const config = useRuntimeConfig()
 const userStore = useUserStore()
 
@@ -87,7 +85,7 @@ async function uploadReview(uploadPurpose: ('assignment' | 'free')) {
                         textReview: reviewUpload.value
                     }
                 })
-                console.log("hi")
+
                 console.log(response)
             } else if (uploadPurpose === 'assignment' && false) {
                 const response = await $fetch(`${config.public.apiBase}/api/reviews/`, {
