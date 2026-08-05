@@ -3,7 +3,7 @@
     <div class="flex flex-row justify-between gap-4 items-center h-[20%] mt-5">
       <div>
         <h2 class="forum text-3xl text-black w-full h-full font-bold">
-          Catalog
+          Books
         </h2>
       </div>
       <div class="flex gap-2 w-[80%] justify-between items-center">
@@ -49,8 +49,11 @@
         <input
           class="forum text-center text-[0.875rem] shadow-xs focus:shadow-md text-black bg-white p-1 w-[16%] rounded-md focus:outline-none transition-all duration-300 ease-in-out"
           type="text" v-model="newBookGenre" placeholder="Book Genre" />
+        <input
+          class="forum text-center text-[0.875rem] shadow-xs focus:shadow-md text-black bg-white p-1 w-[16%] rounded-md focus:outline-none transition-all duration-300 ease-in-out"
+          type="number" v-model="newBookPageLength" placeholder="# Pages" />
         <button
-          class=" forum text-[0.875rem] text-black bg-white hover:bg-emerald-400/20 active:bg-emerald-400/60 m-[1%] rounded-md transition-all p-1 duration-300 ease-in-out hover:-translate-y-px active:translate-y-0.5 shadow-sm hover:shadow-md active:shadow-none px-2 lg:w-20 w-full"
+          class=" forum text-[0.875rem] text-black bg-white hover:bg-emerald-400/20 active:bg-emerald-400/60 m-[1%] rounded-md transition-all p-1 duration-300 ease-in-out hover:-translate-y-px active:translate-y-0.5 shadow-sm hover:shadow-md active:shadow-none px-2 xl:w-20 w-full"
           @click="submitBook()">
           Add Book
         </button>
@@ -78,14 +81,27 @@ const newBookAuthor = ref("");
 const newBookCover = ref("");
 const newBookGenre = ref("");
 const searchInput = ref("");
+const newBookPageLength = ref()
 
-function submitBook() {
-  store.addBook({
-    name: newBookName.value,
-    author: newBookAuthor.value,
-    cover: newBookCover.value,
-    genre: newBookGenre.value
-  }); // POST THIS
+async function submitBook() {
+  try {
+    const response = await fetch(`${config.public.apiBase}/api/books/`, {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${userStore.accessToken}`,
+        "Content-Type": "application/json" 
+      },
+      body: JSON.stringify({
+        title: newBookName.value,
+        genre: newBookGenre.value,
+        img: newBookCover.value,
+        pageLength: newBookPageLength.value, 
+        author: newBookAuthor.value
+      })
+    })
+  } catch (error) {
+    console.error(error)
+  }
 }
 
 const config = useRuntimeConfig()

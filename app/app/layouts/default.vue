@@ -7,7 +7,7 @@
             <button @click="async () => { await navigateTo('/books') }"
                 class="forum text-2xl bg-white shadow-sm hover:shadow-md active:shadow-none active:bg-sky-400/60  px-[5%] rounded-full transition-all duration-300 ease-in-out hover:bg-sky-400/20 hover:translate-y-[-2%] active:translate-y-[2%] text-black flex justify-around items-center gap-2">
                 <BookOpen :weight="'Filled'" :size="24" />
-                Catalog </button>
+                Books </button>
             <button @click="async () => { await navigateTo('/courses') }"
                 class="forum text-2xl bg-white shadow-sm px-[5%] rounded-full transition-all duration-300 ease-in-out hover:bg-sky-400/20 hover:shadow-md active:shadow-none active:bg-sky-400/60 hover:translate-y-[-2%] active:translate-y-[2%] text-black flex justify-around items-center gap-2">
                 <MortarboardSquare :size="24" weight="Filled" />

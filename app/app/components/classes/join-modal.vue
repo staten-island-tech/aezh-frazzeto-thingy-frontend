@@ -9,7 +9,7 @@
             </div>
         </div>
         <label for="classCodeInput" class="forum text-black text-2xl mb-[-2%]">Enter Class Code:</label>
-        <input v-model="classCodeInput" id="classCodeInput" placeholder="XXXX-XXXX" type="text"
+        <input v-model="classCodeInput" id="classCodeInput" placeholder="XXXXXXXXX" type="text"
             @animationend="wobbling = false" :class="{ 'is-wobbling': wobbling }" maxlength="9"
             class="w-full min-h-30 uppercase flex justify-between rounded-2xl focus:outline-none p-[4%] text-[4rem] text-center shadow-md bg-white placeholder-slate-400 focus:shadow-lg transition-all duration-300 ease-in-out text-black forum"></input>
         <button @click="verifyClassCode()"
@@ -23,30 +23,31 @@
 import { X } from 'reicon-vue';
 const emit = defineEmits(['close'])
 const classCodeInput = ref<string>("")
-console.log(localStorage.getItem("accessToken"))
+watch(() => classCodeInput.value, () => {
+    classCodeInput.value = classCodeInput.value.toUpperCase()
+})
+
+const userStore = useUserStore()
+const config = useRuntimeConfig()
+
 const wobbling = ref<boolean>(false)
 async function verifyClassCode() {
     const valid = ref<boolean>(false)
 
-    if (classCodeInput.value.length > 7) { // passcode is invalid
-        // if already wobbling from a previous click reset so animation re-triggers
-        let parsedClassCode = ""
-        console.log(classCodeInput.value.length)
-        if (classCodeInput.value.length == 8) {
-            const codeFirstHalf: string = classCodeInput.value.slice(0, 4)
-            const codeSecondHalf: string = classCodeInput.value.slice(4, 8)
-
-            parsedClassCode = (codeFirstHalf + "-" + codeSecondHalf).toUpperCase()
-        } else if (classCodeInput.value.length == 9) {
-            const codeFirstHalf: string = classCodeInput.value.slice(0, 4)
-            const codeSecondHalf: string = classCodeInput.value.slice(5, 9)
-
-            parsedClassCode = (codeFirstHalf + "-" + codeSecondHalf).toUpperCase()
-        }
-
-        if (true) { // if we search and it becomes valid
-            valid.value = true
-        }
+    try {
+        const response = await fetch(`${config.public.apiBase}/api/courses/join/`, {
+            method: "POST",
+            headers: {
+                "Authorization": `Bearer ${userStore.accessToken}`,
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                classcode: classCodeInput.value
+            })
+        })
+        console.log(response)
+    } catch (error) {
+        console.error(error)
     }
 
     wobbling.value = valid.value
@@ -55,7 +56,7 @@ async function verifyClassCode() {
     })
 }
 </script>
-
+M3pj970qw
 <style scoped>
 @keyframes wobble {
     0% {

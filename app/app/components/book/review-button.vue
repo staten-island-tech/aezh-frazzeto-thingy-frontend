@@ -4,7 +4,7 @@
     <div class="flex flex-col items-center justify-center w-full p-2">
       <div class="w-full flex justify-between mx-2">
         <h2 class="forum text-xl max-w-full text-black text-left w-full">
-          {{ props.review.user }} <slot></slot>
+          {{ poster }} <slot></slot>
         </h2>
         <catalog-stars-container :stars="props.review.stars" :size="24"
           :text-size="'text-xl'"></catalog-stars-container>
@@ -93,4 +93,22 @@ async function deleteReview() {
     throw error
   }
 }
+const poster = ref<string>(props.review.user)
+async function getReviewPoster() {
+  try {
+    const response = await fetch(`${config.public.apiBase}/api/users/${props.review.user}/`, {
+        method: "GET",
+        headers: {
+            "Authorization": `Bearer ${userStore.accessToken}`,
+            "Content-Type": "application/json"
+        }
+    })
+    const userData:any = await response.json()
+    const username = userData.username.split("@")[0]
+    poster.value = username
+  } catch (error) {
+    console.error(error)
+  }
+}
+getReviewPoster()
 </script>
