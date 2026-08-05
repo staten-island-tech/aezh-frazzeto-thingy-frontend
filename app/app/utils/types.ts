@@ -49,3 +49,12 @@ export interface Admin extends AppUser  {
     enrolledClasses: Course[]
     ownedClasses: Course[]
 }
+
+export interface Review {
+  book: number,
+  id: number,
+  assignment: any,
+  isAssignment: boolean,
+  textReview: string,
+  user: 3
+}

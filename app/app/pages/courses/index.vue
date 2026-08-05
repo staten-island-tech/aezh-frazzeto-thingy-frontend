@@ -1,13 +1,14 @@
 <template>
     <div class="w-full px-[2%]">
-        <classes-course-header 
-        @menu-click="(mode) => bodyMode = mode"></classes-course-header>
-        <div class="carousel bg-slate-200 h-[70vh] mt-[3vh] p-[2%] gap-2 shadow-lg rounded-2xl w-full flex items-center">
-            <lazy-classes-course-carousel-item v-for="i in 9" :periodNumber="i" :isArchived="false"></lazy-classes-course-carousel-item>
+        <classes-course-header @menu-click="(mode) => bodyMode = mode"></classes-course-header>
+        <div v-if="courses"
+            class="carousel bg-slate-200 h-[70vh] mt-[3vh] p-[2%] gap-2 shadow-lg rounded-2xl w-full flex items-center">
+            <lazy-classes-course-carousel-item v-for="course in courses" :course=course></lazy-classes-course-carousel-item>
         </div>
     </div>
     <transition name='highlight-background'>
-        <div class="w-screen h-screen bg-taupe-700/40 fixed top-0 left-0" v-if="bodyMode === 'join' || bodyMode === 'add'"></div>
+        <div class="w-screen h-screen bg-taupe-700/40 fixed top-0 left-0"
+            v-if="bodyMode === 'join' || bodyMode === 'add'"></div>
     </transition>
     <transition name="join-modal">
         <lazy-classes-join-modal @close="bodyMode = null" v-if="bodyMode === 'join'"></lazy-classes-join-modal>
@@ -20,17 +21,26 @@
 <script setup lang="ts">
 const bodyMode = ref<null | 'join' | 'add'>(null)
 
+const config = useRuntimeConfig()
+const userStore = useUserStore()
+
 async function fetchCourses() {
     try {
-        const response = await $fetch<Course[]>('/api/courses/', {
+        const response = await fetch(`${config.public.apiBase}/api/courses/`, {
             method: 'GET',
+            headers: {
+                Authorization: `Bearer ${userStore.accessToken}`,
+            },
         });
-        console.log('Fetched courses:', response);
+        return response
     } catch (error) {
         console.error('Error fetching courses:', error);
     }
 }
-fetchCourses()
+
+const courses = await fetchCourses()
+console.log(courses)
+
 </script>
 
 <style scoped>
@@ -72,5 +82,4 @@ fetchCourses()
 .highlight-background-leave-active {
     transition: all 0.2s ease-out
 }
-
 </style>

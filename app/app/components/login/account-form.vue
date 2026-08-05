@@ -58,8 +58,8 @@ const props = defineProps<{
 const userStore = useUserStore();
 const config = useRuntimeConfig();
 
-const email = ref<string>("");
-const password = ref<string>("");
+const email = ref<string>("edwardm172@nycstudents.net");
+const password = ref<string>("P@ssword123");
 
 const errorMessage = ref<string>("");
 const emailValid = ref<boolean>(false);

@@ -1,13 +1,16 @@
 <template>
   <div ref="reviewContainer"
-    class="shadow-md w-full rounded-lg flex flex-col items-center justify-center m-[1%] transition-all duration-300 ease-in-out px-1">
+    class="shadow-md w-full rounded-lg flex flex-col items-center justify-center m-[1%] transition-all duration-300 ease-in-out px-1 bg-slate-200">
     <div class="flex flex-col items-center justify-center w-full p-2">
       <div class="w-full flex justify-between mx-2">
         <h2 class="forum text-xl max-w-full text-black text-left w-full">
-          {{ props.review.reviewer }} <slot></slot>
+          {{ props.review.user }} <slot></slot>
         </h2>
-        <catalog-stars-container :stars="props.review.rating" :size="24" :text-size="'text-xl'"></catalog-stars-container>
-        <Trash2 @click="" color="black" :size="32" weight="Filled" class="hover:bg-red-400/20 active:bg-red-400/60 transition-all duration-300 ease-in-out rounded-full"/>
+        <catalog-stars-container :stars="props.review.stars" :size="24"
+          :text-size="'text-xl'"></catalog-stars-container>
+        <Trash2 @click="deleteReview()" v-if="useUserStore().userType === 'Admin'" color="black" :size="32"
+          weight="Filled"
+          class="hover:bg-red-400/20 active:bg-red-400/60 transition-all duration-300 ease-in-out rounded-full" />
       </div>
       <h3 class="forum text-[0.875rem] text-black justify-center text-center">
         {{ visibleContent }}{{ !props.review.expanded && hasMore ? '...' : '' }}
@@ -59,17 +62,35 @@ onUnmounted(() => {
 
 const TRUNCATE_LENGTH = computed(() => Math.ceil(containerWidth.value / 6.6))
 
-const hasMore = computed(() => props.review.review.length > TRUNCATE_LENGTH.value)
+const hasMore = computed(() => (props.review.textReview.length || 50) > TRUNCATE_LENGTH.value)
 
 const visibleContent = computed(() => {
-  if (!hasMore.value) return props.review.review
-  const cut = props.review.review.slice(0, TRUNCATE_LENGTH.value)
+  if (!hasMore.value) return props.review.textReview
+  const cut = props.review.textReview.slice(0, TRUNCATE_LENGTH.value)
   const lastSpace = cut.lastIndexOf(' ')
   return lastSpace > 0 ? cut.slice(0, lastSpace) : cut
 })
 
 const extraContent = computed(() => {
   if (!hasMore.value) return ''
-  return props.review.review.slice(visibleContent.value.length)
+  return props.review.textReview.slice(visibleContent.value.length)
 })
+
+const config = useRuntimeConfig()
+const userStore = useUserStore()
+
+async function deleteReview() {
+  try {
+    const response = await $fetch(`${config.public.apiBase}/api/review/delete/${props.review.id}/`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${userStore.accessToken}`,
+        "Content-Type": "application/json",
+      },
+    })
+  } catch (error: any) {
+    console.error(error)
+    throw error
+  }
+}
 </script>
