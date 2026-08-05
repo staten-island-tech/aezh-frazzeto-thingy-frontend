@@ -13,11 +13,13 @@
         placeholder="Email"
         v-model="email"
       />
-      <button v-if="userType === 'Student'" class="bg-slate-100 hover:bg-emerald-400/20 active:bg-emerald-400/60 transition-all duration-300 ease-in-out shadow-md 
-      hover:shadow-lg active:shadow-none rounded-2xl hover:-translate-y-.5 active:translate-y-px forum p-2 absolute top-[40%] right-2"
-      @click="email += '@nycstudents.net'"
-      > Add Email Handle
-    </button>
+      <button
+        v-if="userType === 'Student'"
+        class="bg-slate-100 hover:bg-emerald-400/20 active:bg-emerald-400/60 transition-all duration-300 ease-in-out shadow-md hover:shadow-lg active:shadow-none rounded-2xl hover:-translate-y-.5 active:translate-y-px forum p-2 absolute top-[40%] right-2"
+        @click="email += '@nycstudents.net'"
+      >
+        Add Email Handle
+      </button>
       <input
         type="password"
         class="shadow-sm bg-white focus:shadow-md placeholder-slate-400 w-full rounded-xl px-4 py-3 elms-sans focus:outline-none text-left text-lg forum transition-all"
@@ -127,12 +129,17 @@ async function logIn() {
       },
     );
 
-    userStore.loginSuccess(response.access, response.refresh, email.value, props.userType);
-    localStorage.setItem("refreshToken", response.refresh)
-    localStorage.setItem("accessToken", response.access)
+    userStore.loginSuccess(
+      response.access,
+      response.refresh,
+      email.value,
+      props.userType,
+    );
+    localStorage.setItem("refreshToken", response.refresh);
+    localStorage.setItem("accessToken", response.access);
     navigateTo("/");
   } catch (error) {
-    console.error(error)
+    console.error(error);
     errorMessage.value = "Invalid email or password.";
   }
 }

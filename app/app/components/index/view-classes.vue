@@ -7,7 +7,7 @@
         </div>
         <button
             class="hover:shadow-lg active:shadow-none shadow-sm forum text-2xl bg-white px-[5%] transition-all duration-300 ease-in-out hover:bg-sky-400/20 active:bg-sky-400/60 hover:translate-y-[-2%] active:translate-y-[2%] h-[60%] text-black w-full rounded-full"
-            @click="async () => { await navigateTo('/classes') }">
+            @click="async () => { await navigateTo('/courses') }">
             View Classes </button>
     </div>
 </template>

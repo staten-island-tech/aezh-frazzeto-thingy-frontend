@@ -10,10 +10,9 @@ function decodeJwtPayload(token: string): Record<string, any> | null {
 }
 
 function getLocalStorage(key: string): string | null {
-    if (typeof window === "undefined") return null
-    return localStorage.getItem(key)
+  if (typeof window === "undefined") return null;
+  return localStorage.getItem(key);
 }
-
 
 export const useUserStore = defineStore("functions", {
   state: () => ({
@@ -25,9 +24,9 @@ export const useUserStore = defineStore("functions", {
   }),
   actions: {
     loadFromLocalStorage() {
-      if (typeof window === "undefined") return
-            this.accessToken = localStorage.getItem('accessToken')
-            this.refreshToken = localStorage.getItem('refreshToken')
+      if (typeof window === "undefined") return;
+      this.accessToken = localStorage.getItem("accessToken");
+      this.refreshToken = localStorage.getItem("refreshToken");
     },
     validatePassword(passwordChange: string): [string, boolean] {
       if (passwordChange.length === 0) return ["Empty password field.", false];
@@ -53,6 +52,24 @@ export const useUserStore = defineStore("functions", {
         ];
       else return ["", true];
     },
+    loadFromCookies() {
+      const accessCookie = useCookie<string | null>("accessToken");
+      const refreshCookie = useCookie<string | null>("refreshToken");
+      this.accessToken = accessCookie.value;
+      this.refreshToken = refreshCookie.value;
+      this.loggedIn = !!this.accessToken;
+
+      if (this.accessToken && !this.user) {
+        const payload = decodeJwtPayload(this.accessToken);
+        if (payload) {
+          this.user = {
+            user_id: payload.user_id ?? "",
+            username: payload.username ?? payload.email ?? "",
+            name: payload.username ?? payload.email ?? "",
+          };
+        }
+      }
+    },
     loginSuccess(
       access: string,
       refresh: string,
@@ -69,6 +86,18 @@ export const useUserStore = defineStore("functions", {
         username: email,
         name: email,
       };
+      const accessCookie = useCookie<string | null>("accessToken", {
+        maxAge: 60 * 15, // match your JWT access token lifetime
+        sameSite: "lax",
+        secure: true,
+      });
+      const refreshCookie = useCookie<string | null>("refreshToken", {
+        maxAge: 60 * 60 * 24 * 7, // match your refresh token lifetime
+        sameSite: "lax",
+        secure: true,
+      });
+      accessCookie.value = access;
+      refreshCookie.value = refresh;
     },
     async refreshAccessToken(): Promise<boolean> {
       if (!this.refreshToken) return false;
@@ -79,8 +108,12 @@ export const useUserStore = defineStore("functions", {
           { method: "POST", body: { refresh: this.refreshToken } },
         );
         this.accessToken = response.access;
+        this.loggedIn = true;
+        const accessCookie = useCookie<string | null>("accessToken");
+        accessCookie.value = response.access;
         return true;
-      } catch {
+      } catch (err) {
+        console.error("Refresh failed", err);
         this.logout();
         return false;
       }
@@ -90,6 +123,10 @@ export const useUserStore = defineStore("functions", {
       this.user = null;
       this.accessToken = null;
       this.refreshToken = null;
+      const accessCookie = useCookie<string | null>("accessToken");
+      const refreshCookie = useCookie<string | null>("refreshToken");
+      accessCookie.value = null;
+      refreshCookie.value = null;
     },
   },
 });
