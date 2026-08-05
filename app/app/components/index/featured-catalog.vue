@@ -25,6 +25,7 @@
             </div>
         </div>
     </div>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -54,14 +55,15 @@ await searchFeatured()
 
 <style scoped>
 .scroll-container {
-    &::-webkit-scrollbar {
-        display: none;
-    }
-    scrollbar-width: none;
-    -ms-overflow-style: none; 
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
-.this-class-does-nothing { /* this class is so that the closing style tag does not show up as yellow :) */
-    text-align: left
+.this-class-does-nothing {
+  /* this class is so that the closing style tag does not show up as yellow :) */
+  text-align: left;
 }
 </style>
