@@ -81,23 +81,23 @@ const newBookAuthor = ref("");
 const newBookCover = ref("");
 const newBookGenre = ref("");
 const searchInput = ref("");
-const newBookPageLength = ref(0)
+const newBookPageLength = ref()
 
 async function submitBook() {
   try {
     const response = await fetch(`${config.public.apiBase}/api/books/`, {
       method: "POST",
       headers: {
-          Authorization: `Bearer ${userStore.accessToken}`,
+        "Authorization": `Bearer ${userStore.accessToken}`,
+        "Content-Type": "application/json" 
       },
-      body: {
-        // @ts-ignore
+      body: JSON.stringify({
         title: newBookName.value,
         genre: newBookGenre.value,
         img: newBookCover.value,
-        pageLength: newBookPageLength.value,
+        pageLength: newBookPageLength.value, 
         author: newBookAuthor.value
-      }
+      })
     })
   } catch (error) {
     console.error(error)
