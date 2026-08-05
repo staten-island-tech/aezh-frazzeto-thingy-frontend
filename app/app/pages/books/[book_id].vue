@@ -1,6 +1,8 @@
 <template>
   <div class="h-dvh px-[1%] flex flex-col items-center justify-center">
-    <book-bk-header :book-title="`${book.title} - written by ${book.author.name}`"></book-bk-header>
+    <book-bk-header
+      :book-title="`${book.title} - written by ${book.author.name}`"
+    ></book-bk-header>
     <div
       class="w-full h-[70vh] p-2 bg-slate-200 shadow-md mt-[3vh] rounded-lg flex md:flex-row flex-col items-center justify-between gap-2 overflow-y-scroll">
       <!-- Please someone replace the placeholder image so it shows the correct book cover same thing with the rest of the book's details-->
@@ -42,16 +44,14 @@
 <script setup lang="ts">
 import { ArrowLeft, ArrowRight } from 'reicon-vue'
 
-const currentPageNum = ref<number>(1)
-const showReviews = ref<boolean>(true)
+const currentPageNum = ref<number>(1);
+const showReviews = ref<boolean>(true);
 
-
-// Use of route is a temporary solution until I figure out how to pass the book_id from the catalog page to the book page.
 const route = useRoute();
 const book_id = parseInt(route.params.book_id as string) || 1;
 
-const config = useRuntimeConfig()
-const userStore = useUserStore()
+const config = useRuntimeConfig();
+const userStore = useUserStore();
 
 async function searchForBook(params: { id?: number } = {}) {
   try {
