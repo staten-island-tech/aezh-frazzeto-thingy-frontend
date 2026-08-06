@@ -8,7 +8,7 @@
       featuredBooks = booksReturn
       searchFeatured = !searchFeatured
     }"> </catalog-cat-header>
-    <div class="flex gap-4 justify-between lg:justify-start p-[1%] forum text-black font-bold rounded-2xl shadow-lg text-lg bg-slate-200 w-full h-[70vh]! mt-[3vh] overflow-y-scroll flex-wrap relative">
+    <div class="flex gap-4 justify-between lg:justify-start p-[1%] forum text-black font-bold rounded-2xl shadow-lg text-lg bg-slate-200 w-full h-[70vh]! mt-[3vh] overflow-y-scroll flex-wrap relative pt-[3%] pb-[7%]">
       <catalog-book-cover v-if="showCatalog && !searchFeatured"
         v-for="book in (books as any).results"
         :key="book.title"
@@ -20,12 +20,12 @@
         :book="book"
       >
       </catalog-book-cover>
-      <div class="bg-white fixed lg:w-[40%] w-[60%] h-[10%] lg:left-[30%] left-[20%] rounded-2xl bottom-2 shadow-md flex justify-between items-center px-2" v-if="!searchFeatured">
+      <div class="bg-white fixed z-2 lg:w-[40%] w-[60%] h-[10%] lg:left-[30%] left-[20%] rounded-2xl bottom-2 shadow-md flex justify-between items-center px-2" v-if="!searchFeatured">
         <button class="bg-slate-200 aspect-square h-[80%] rounded-2xl flex items-center justify-center shadow-sm hover:shadow-md hover:bg-slate-300 active:shadow-none active:bg-sky-400/60 transition-all duration-300 ease-in-out" @click="paginationInteract(-1)"> <ArrowLeft :size="24" /> </button>
         <p class="text-2xl forum"> Pg. {{ currentPageNum }} </p>
         <button class="bg-slate-200 aspect-square h-[80%] rounded-2xl flex items-center justify-center shadow-sm hover:shadow-md hover:bg-slate-300 active:shadow-none active:bg-sky-400/40 transition-all duration-300 ease-in-out" @click="paginationInteract(1)"> <ArrowRight :size="24" /> </button>
       </div>
-      <div class="bg-white fixed lg:w-[40%] w-[60%] h-[10%] lg:left-[30%] left-[20%] rounded-2xl bottom-2 shadow-md flex justify-between items-center px-2" v-else>
+      <div class="z-2 bg-white fixed lg:w-[40%] w-[60%] h-[10%] lg:left-[30%] left-[20%] rounded-2xl bottom-2 shadow-md flex justify-between items-center px-2" v-else>
         <p class="text-2xl forum w-full text-center"> Featured Catalog </p>
       </div>
     </div>

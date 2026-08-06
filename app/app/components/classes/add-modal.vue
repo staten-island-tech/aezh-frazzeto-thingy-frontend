@@ -52,6 +52,7 @@ async function createNewClass() {
         }
     }
     )
+    emit('close')
 }
 </script>
 

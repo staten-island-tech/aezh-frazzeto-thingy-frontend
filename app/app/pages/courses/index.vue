@@ -11,10 +11,10 @@
             v-if="bodyMode === 'join' || bodyMode === 'add'"></div>
     </transition>
     <transition name="join-modal">
-        <lazy-classes-join-modal @close="bodyMode = null" v-if="bodyMode === 'join'"></lazy-classes-join-modal>
+        <lazy-classes-join-modal @close="async () => {bodyMode = null; courses = await fetchCourses()}" v-if="bodyMode === 'join'"></lazy-classes-join-modal>
     </transition>
     <transition name="add-modal">
-        <lazy-classes-add-modal @close="bodyMode = null" v-if="bodyMode === 'add'"></lazy-classes-add-modal>
+        <lazy-classes-add-modal @close="async () => {bodyMode = null; courses = await fetchCourses()}" v-if="bodyMode === 'add'"></lazy-classes-add-modal>
     </transition>
 </template>
 
@@ -45,11 +45,14 @@ async function fetchCourses() {
     }
 }
 
-const courses = await fetchCourses()
+const courses = ref(await fetchCourses())
 
 const sortedCourses = computed(() => {
-    if (!courses) return []
-    return [...courses].sort((a, b) => a.id - b.id)
+    if (!courses.value) return []
+    let sortedByPeriod = [...courses.value].sort((a, b) => a.period - b.period)
+    let sortedByName = sortedByPeriod.sort((a, b) => a.name.localeCompare(b.name))
+    let sortedByArchived = sortedByName.sort((a, b) => a.isArchived - b.isArchived)
+    return sortedByArchived
 })
 </script>
 <style scoped>

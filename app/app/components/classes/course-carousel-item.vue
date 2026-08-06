@@ -1,9 +1,9 @@
 <template>
     <div class="shadow-md h-[94%] w-[40vw]! rounded-2xl p-4 carousel-item flex flex-col mx-2 overflow-y-scroll"
         :class="[course.isArchived ? 'bg-sky-100' : 'bg-white', deleted ? 'hidden' : '']">
-        <h3 class="text-slate-800 forum text-2xl text-center font-black">{{ course.instructor.split("@")[0] }}'s {{
-            course.name }}, Period {{
-                course.period }}</h3>
+        <h3 class="text-slate-800 forum text-2xl text-center font-black">{{ course.instructor.split("@")[0] === userStore.user!.username.split("@")[0] ? 'Your' : `${course.instructor.split("@")[0]}'s` }} 
+            <span class="italic text-slate-700">{{ course.name }}</span>, Period <span class="italic text-slate-700"> {{
+                course.period }}</span></h3>
         <p class="text-lg italic forum text-slate-600 text-center">your role: {{ useUserStore().userType }}</p>
         <div class="h-1 rounded-full bg-slate-800 my-2 mb-4"></div>
         <div v-if="upcomingReview"
@@ -86,7 +86,7 @@
                     <ArchiveDown2 :size="24" />
                 </button>
             </div>
-            <button v-else
+            <button v-else @click="leaveClass()"
                 class="transition-all duration-300 ease-in-out shadow-sm min-h-10 flex justify-between px-4 items-center rounded-2xl text-black forum hover:shadow-lg hover:-translate-y-0.5 active:translate-y-1 hover:bg-red-400/20 active:bg-red-400/60 active:shadow-none gap-2 w-full mt-4">
                 <ArrowDoorIn :size="24" />
                 Leave Class
@@ -111,7 +111,7 @@
                     </div>
                 </div>
                 <h3 class="text-[3rem] font-bold forum text-black text-center mt-10">CLASS CODE:</h3>
-                <h3 class="text-[7rem] font-black forum text-black text-center mb-[30%]">{{ course.classcode }}</h3>
+                <h3 class="xl:text-[12rem] lg:text-[9rem] md:text-[6rem] font-black forum text-black text-center mb-[30%]">{{ course.classcode }}</h3>
             </div>
         </transition>
     </div>
@@ -235,6 +235,25 @@ async function deleteClass() {
                 "Content-Type": "application/json"
             }
         })
+        deleted.value = true
+    } catch (error) {
+        console.error(error)
+    }
+}
+
+async function leaveClass() {
+    try {
+        /*const response = await fetch(`${config.public.apiBase}/api/courses`, {
+            method: "",
+            headers: {
+                Authorization: `Bearer ${userStore.accessToken}`,
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                classcode: prop.course.classcode,
+                user: 1
+            })
+        })*/
         deleted.value = true
     } catch (error) {
         console.error(error)
