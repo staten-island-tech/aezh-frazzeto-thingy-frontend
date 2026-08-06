@@ -9,12 +9,12 @@
       <button
         @click="
           async () => {
-            await navigateTo('/catalog');
+            await navigateTo('/books');
           }
         "
         class="forum text-2xl bg-white shadow-sm hover:shadow-lg active:shadow-none px-[5%] text-black rounded-full w-[40%] transition-all duration-300 ease-in-out hover:bg-sky-400/20 active:bg-sky-400/60 hover:translate-y-[-2%] active:translate-y-[2%] h-[70%]"
       >
-        View Catalog
+        View Books
       </button>
     </div>
     <div class="carousel h-full rounded-2xl mt-[2%] gap-2 px-2 scrollbar-auto scrollbar-thumb-slate-900">
@@ -33,7 +33,7 @@
             class="w-full flex flex-col items-center min-h-[70%] justify-around"
           >
             <h3 class="forum text-lg text-center font-bold">
-              {{ featuredBook.genre }}
+              Genre: {{ featuredBook.genre }}
             </h3>
             <catalog-stars-container
               :stars="((Math.round(featuredBook.averageRating*10))/10) || 0"
