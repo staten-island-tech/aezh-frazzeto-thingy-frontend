@@ -16,10 +16,10 @@
             class="h-[64%] w-full flex items-center bg-slate-100 shadow-md rounded-2xl p-2 flex-col justify-between py-1">
             <p class="forum text-2xl text-black font-bold m-2 text-center"> You have no upcoming reviews! Chill out and
                 read a book.</p>
-            <button @click="async () => { await navigateTo('/catalog') }"
+            <button @click="async () => { await navigateTo('/books') }"
                 class="forum text-2xl bg-white shadow-sm hover:shadow-lg active:shadow-none px-[5%] text-black rounded-full w-full
             transition-all duration-300 ease-in-out hover:bg-sky-100 active:bg-sky-300 hover:-translate-y-0.5 active:translate-y-1 py-[5%]">
-                View Catalog </button>
+                View Books </button>
             <div class="h-1 rounded-full bg-slate-800 my-2"></div>
         </div>
         <div class="w-full flex flex-col justify-between">

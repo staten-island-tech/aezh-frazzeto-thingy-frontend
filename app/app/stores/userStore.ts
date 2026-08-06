@@ -93,6 +93,7 @@ export const useUserStore = defineStore("functions", {
       });
       accessCookie.value = access;
       refreshCookie.value = refresh;
+      console.log(accessCookie, refreshCookie)
     },
     async refreshAccessToken(): Promise<boolean> {
       if (!this.refreshToken) return false;
