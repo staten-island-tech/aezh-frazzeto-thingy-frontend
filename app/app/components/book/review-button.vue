@@ -1,5 +1,5 @@
 <template>
-  <div ref="reviewContainer"
+  <div ref="reviewContainer" v-if="!deleted"
     class="shadow-md w-full rounded-lg flex flex-col items-center justify-center m-[1%] transition-all duration-300 ease-in-out px-1 bg-slate-200">
     <div class="flex flex-col items-center justify-center w-full p-2">
       <div class="w-full flex justify-between mx-2">
@@ -41,6 +41,7 @@ const props = defineProps({
 
 const userType = useUserStore().userType
 
+const deleted = ref<boolean>(false)
 const reviewContainer = ref<HTMLElement | null>(null)
 const containerWidth = ref(0)
 let resizeObserver: ResizeObserver | null = null
@@ -88,6 +89,7 @@ async function deleteReview() {
         "Content-Type": "application/json",
       },
     })
+    deleted.value = true
   } catch (error: any) {
     console.error(error)
     throw error
