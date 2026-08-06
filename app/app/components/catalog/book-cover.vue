@@ -1,5 +1,5 @@
 <template>
-    <div class="relative w-[15vw] max-h-[40vh] aspect-1/2! shrink-0" ref="bookCover">
+    <div class="relative min-w-[25vw] xl:min-w-[15vw] max-h-[30vh] lg:max-h-[40vh] aspect-1/2! shrink-0" ref="bookCover">
         <img @click="isSelected = !isSelected" v-if="book.img"
             class="absolute w-full h-full object-cover rounded-lg z-0 shadow-sm hover:shadow-lg active:shadow-none hover:scale-[1.03] hover:-translate-y-2 shadow-slate-600 active:translate-y-1 transition-all duration-300 ease-in-out active:scale-[0.97]"
             :src="book.img" />
