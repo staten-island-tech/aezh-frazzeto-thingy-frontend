@@ -17,7 +17,7 @@
         View Catalog
       </button>
     </div>
-    <div class="carousel h-full rounded-2xl mt-[2%] gap-2 px-2">
+    <div class="carousel h-full rounded-2xl mt-[2%] gap-2 px-2 scrollbar-auto scrollbar-thumb-slate-900">
       <div
         class="h-[95%] bg-white p-[0.5%] carousel-item text-black rounded-lg flex items-center justify-between px-2 shadow-lg overflow-hidden w-80 relative gap-2"
         v-for="featuredBook in featuredBooks"
