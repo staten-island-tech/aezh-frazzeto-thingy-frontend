@@ -1,5 +1,5 @@
 <template>
-    <div class="shadow-md h-[94%] w-[40vw]! rounded-2xl p-4 carousel-item flex flex-col mx-2 overflow-y-scroll"
+    <div class="shadow-md h-[94%] w-[40vw] min-w-90 rounded-2xl p-4 carousel-item flex flex-col mx-2 overflow-y-scroll"
         :class="[course.isArchived ? 'bg-sky-100' : 'bg-white', deleted ? 'hidden' : '']">
         <h3 class="text-slate-800 forum text-2xl text-center font-black">{{ course.instructor.split("@")[0] === userStore.user!.username.split("@")[0] ? 'Your' : `${course.instructor.split("@")[0]}'s` }} 
             <span class="italic text-slate-700">{{ course.name }}</span>, Period <span class="italic text-slate-700"> {{
@@ -25,7 +25,7 @@
         <div class="w-full flex flex-col justify-between">
             <div class="flex justify-between flex-wrap gap-4" v-if="userRole === 'Admin'">
                 <div class="flex flex-row justify-between items-center w-full h-[16%]">
-                    <h2 class="text-2xl text-black forum font-bold mt-2">Actions:</h2>
+                    <h2 class="text-2xl text-black forum font-bold mt-2 h-full flex items-center">Actions:</h2>
                     <button @click="showClassCode = true"
                         class="transition-all duration-300 ease-in-out shadow-sm min-h-10 flex justify-between px-4 items-center rounded-2xl text-black forum hover:shadow-lg active:translate-y-1 hover:-translate-y-0.5 hover:bg-sky-400/20 active:bg-sky-400/60 active:shadow-none gap-2">
                         <Screencast2 :size="24" weight="Filled" />
