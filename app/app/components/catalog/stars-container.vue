@@ -1,6 +1,6 @@
 <template>
     <div class="flex justify-end gap-2 mr-2 items-center">
-        <p class="forum" :class="textSize, textColor"> {{ stars }}/5</p>
+        <p class="forum font-bold" :class="textSize, textColor"> {{ stars }}/5</p>
         <Star :size="((size ? size : 32)  as number)" color="#efb100" weight="Filled" />
     </div>
 </template>
