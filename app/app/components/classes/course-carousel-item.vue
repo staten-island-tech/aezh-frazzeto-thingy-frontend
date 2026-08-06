@@ -1,9 +1,9 @@
 <template>
     <div class="shadow-md h-[94%] w-[40vw]! rounded-2xl p-4 carousel-item flex flex-col mx-2 overflow-y-scroll"
         :class="[course.isArchived ? 'bg-sky-100' : 'bg-white', deleted ? 'hidden' : '']">
-        <h3 class="text-slate-800 forum text-2xl text-center font-black">{{ course.instructor.split("@")[0] }}'s {{
-            course.name }}, Period {{
-                course.period }}</h3>
+        <h3 class="text-slate-800 forum text-2xl text-center font-black">{{ course.instructor.split("@")[0] === userStore.user!.username.split("@")[0] ? 'Your' : `${course.instructor.split("@")[0]}'s` }} 
+            <span class="italic text-slate-700">{{ course.name }}</span>, Period <span class="italic text-slate-700"> {{
+                course.period }}</span></h3>
         <p class="text-lg italic forum text-slate-600 text-center">your role: {{ useUserStore().userType }}</p>
         <div class="h-1 rounded-full bg-slate-800 my-2 mb-4"></div>
         <div v-if="upcomingReview"
