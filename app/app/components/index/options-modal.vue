@@ -2,7 +2,7 @@
     <div class="p-[1%] flex flex-col gap-6 text-black right-2 top-12 fixed w-[70vw] lg:w-[40vw] z-2">
         <div class="bg-slate-100 rounded-3xl shadow-md p-8 flex flex-col items-center gap-6">
             <div class="flex justify-between w-full items-center">
-                <h2 class="text-3xl forum font-bold text-center"> Options [username] </h2>
+                <h2 class="text-3xl forum font-bold text-center"> Options <span class="text-[1.2rem] italic text-slate-800">[for {{userStore.user!.username.split("@")[0]}}]</span> </h2>
                 <X :size="40" @click="$emit('close')" class="rounded-full hover:bg-sky-400/20 p-1 transition-colors duration-200 ease-in"/>
             </div>
             <div class="h-full w-full">
