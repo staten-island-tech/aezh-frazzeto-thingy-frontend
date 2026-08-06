@@ -23,11 +23,6 @@ export const useUserStore = defineStore("functions", {
     refreshToken: null as string | null,
   }),
   actions: {
-    loadFromLocalStorage() {
-      if (typeof window === "undefined") return;
-      this.accessToken = localStorage.getItem("accessToken");
-      this.refreshToken = localStorage.getItem("refreshToken");
-    },
     validatePassword(passwordChange: string): [string, boolean] {
       if (passwordChange.length === 0) return ["Empty password field.", false];
       else if (passwordChange.length < 8)

@@ -115,6 +115,7 @@ function validateFields(): boolean {
 }
 
 async function logIn() {
+
   if (!validateFields()) return;
 
   try {
