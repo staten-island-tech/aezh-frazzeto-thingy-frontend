@@ -33,7 +33,7 @@
                 class="flex-1 forum text-md lg:text-lg bg-slate-100 hover:bg-emerald-400/20 over:shadow-md active:shadow-none active:bg-emerald-400/60 py-2 rounded-xl transition-all duration-300 ease-in-out hover:-translate-y-0.5 active:translate-y-0.5 shadow-sm hover:shadow-md text-black w-[40%]">
                 Upload For Fun
             </button>
-            <button @click="uploadReview('assignment')"
+            <button @click="uploadReview('assignment')" v-if="userStore.userType === 'Student'"
                 class="flex-1 forum text-md lg:text-lg bg-slate-100 hover:bg-emerald-400/20 over:shadow-md active:shadow-none active:bg-emerald-400/60 py-2 rounded-xl transition-all duration-300 ease-in-out hover:-translate-y-0.5 active:translate-y-0.5 shadow-sm hover:shadow-md text-black w-[40%]">
                 Upload To Assignment
             </button>
