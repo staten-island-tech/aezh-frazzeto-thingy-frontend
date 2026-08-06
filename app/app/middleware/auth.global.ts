@@ -2,6 +2,9 @@ export default defineNuxtRouteMiddleware(async (to) => {
   if (to.path === "/login") return;
 
   const userStore = useUserStore();
+
+  if(userStore.loggedIn) return;
+
   userStore.loadFromCookies();
 
   if (!userStore.accessToken) {

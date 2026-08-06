@@ -115,9 +115,11 @@ function validateFields(): boolean {
 }
 
 async function logIn() {
+
   if (!validateFields()) return;
 
   try {
+    
     const response = await $fetch<{ access: string; refresh: string }>(
       `${config.public.apiBase}/api/token/`,
       {
@@ -128,6 +130,7 @@ async function logIn() {
         },
       },
     );
+    console.log(response)
 
     userStore.loginSuccess(
       response.access,
@@ -135,9 +138,13 @@ async function logIn() {
       email.value,
       props.userType,
     );
-    localStorage.setItem("refreshToken", response.refresh);
-    localStorage.setItem("accessToken", response.access);
-    navigateTo("/");
+    
+    
+    userStore.loggedIn = true
+
+    console.log(userStore.loggedIn)
+    navigateTo('/')
+
   } catch (error) {
     console.error(error);
     errorMessage.value = "Invalid email or password.";
