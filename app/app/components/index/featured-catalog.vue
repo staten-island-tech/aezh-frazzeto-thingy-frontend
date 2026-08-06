@@ -36,7 +36,7 @@
               {{ featuredBook.genre }}
             </h3>
             <catalog-stars-container
-              :stars="featuredBook.averageRating || 0"
+              :stars="((Math.round(featuredBook.averageRating*10))/10) || 0"
               :text-size="'text-2xl'"
               :size="48"
             ></catalog-stars-container>
