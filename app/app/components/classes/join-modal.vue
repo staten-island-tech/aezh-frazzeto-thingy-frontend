@@ -45,7 +45,7 @@ async function verifyClassCode() {
                 classcode: classCodeInput.value
             })
         })
-        console.log(response)
+        emit('close')
     } catch (error) {
         console.error(error)
     }
