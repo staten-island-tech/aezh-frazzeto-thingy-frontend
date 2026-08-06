@@ -19,12 +19,12 @@
     </div>
     <div class="carousel h-full rounded-2xl mt-[2%] gap-2 px-2">
       <div
-        class="h-[95%] bg-white p-[0.5%] carousel-item text-black rounded-lg flex justify-between gap-1 px-2 shadow-lg overflow-hidden w-80 relative"
+        class="h-[95%] bg-white p-[0.5%] carousel-item text-black rounded-lg flex items-center justify-between px-2 shadow-lg overflow-hidden w-80 relative gap-2"
         v-for="featuredBook in featuredBooks"
         loading="lazy"
       >
-        <img :src="featuredBook.img" class="rounded-lg aspect-1/2" />
-        <div class="flex flex-col min-w-[50%] w-full over">
+        <img :src="featuredBook.img" class="rounded-lg aspect-1/2 max-h-[70%] min-w-[40%]" />
+        <div class="flex flex-col min-w-[50%] w-full over h-full">
           <h3 class="forum text-lg text-center font-bold">
             {{ featuredBook.title }}
           </h3>
@@ -36,7 +36,7 @@
               {{ featuredBook.genre }}
             </h3>
             <catalog-stars-container
-              :stars="featuredBook.averageRating || 0"
+              :stars="((Math.round(featuredBook.averageRating*10))/10) || 0"
               :text-size="'text-2xl'"
               :size="48"
             ></catalog-stars-container>

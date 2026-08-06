@@ -12,7 +12,7 @@
           <h4 class="forum text-lg lg:text-2xl text-black font-bold w-[65%]">
             {{ book.title }} - {{ book.genre }}
           </h4>
-          <catalog-stars-container :text-size="'text-2xl'" :size="32" :stars="bookRating"
+          <catalog-stars-container :text-size="'text-2xl'" :size="32" :stars="(Math.round(bookRating*10)/10) || 0"
             class="w-[30%] h-full"></catalog-stars-container>
         </div>
         <div class="h-1 rounded-full bg-slate-800 my-2 w-full"></div>
