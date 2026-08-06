@@ -10,15 +10,12 @@
             class="bg-white h-[90%] rounded-2xl shadow-md w-full overflow-y-scroll flex flex-row flex-wrap p-4 gap-2 justify-between">
             <div v-for="student in students"
                 class="bg-slate-300 min-w-60 w-[30%] h-50 rounded-2xl shadow-md flex flex-col p-1.5 justify-between">
-                <h5 class="forum text-black text-md text-center">{{ student.username }} / {{ student.name }}</h5>
-                <div v-if="!student.completedReviews.length"
+                <h5 class="forum text-black text-md text-center"> {{student.split('@')[0]}} </h5>
+                <div v-if="!student"
                     class="bg-red-400/20 shadow-red-400/50 text-center rounded-2xl shadow-xs p-1 text-black forum text-md mt-2 h-[60%] flex items-center justify-center">
                     This student has not submitted a review yet.
                 </div>
-                <!-- when you submit a review it should be like, a submitted review linked to that table??? 
-                 i dont actually know how to do that for the time being lol
-                 link most of the backend first and i can figure it out byebye :)-->
-                <classes-student-submission :review="student.completedReviews.at(-1)!" v-else>
+                <classes-student-submission :review="{}" v-else>
                 </classes-student-submission>
                 <button
                     class="bg-white hover:bg-red-400/20 active:bg-red-400/60 shadow-xs hover:shadow-md active:shadow-none hover:-translate-y-px active:translate-y-0.5 transition-all duration-300 ease-in-out rounded-full py-1 mt-2 forum text-black text-center flex items-center gap-2 justify-center">
@@ -35,7 +32,11 @@ import { ArrowDoorIn } from 'reicon-vue';
 
 const emit = defineEmits(['close'])
 
-const students = ref<Student[]>([])
+const prop = defineProps<{
+    students: any[]
+}>()
+
+console.log(prop.students)
 
 </script>
 

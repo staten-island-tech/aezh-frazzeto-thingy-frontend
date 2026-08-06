@@ -4,7 +4,7 @@
     rounded-2xl py-1 mt-2" :class="divClasses" @click="isClicked = !isClicked" @mouseover="isHover = true"
         @mouseleave="isHover = false">
         <div class="w-full flex justify-between items-center px-[1%]">
-            <h5 class="forum text-black text-center italic text-xs"> (on {{ review.book_name }})</h5>
+            <h5 class="forum text-black text-center italic text-xs"> (on {{ review }})</h5>
             <CatalogStarsContainer :stars="3" :size="20" :text-size="'text-md'"></CatalogStarsContainer>
         </div>
         <div class="h-1 rounded-full bg-slate-800 my-0.5 mx-1"></div>
@@ -13,14 +13,14 @@
             Click to expand.
         </div>
         <div class="flex w-full px-[1%] mt-[1%]">
-            <p class="text-sm forum text-black"> {{ review.review_content }} </p>
+            <p class="text-sm forum text-black"> {{ review }} </p>
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
 defineProps<{
-    review: Review
+    review: object
 }>()
 
 const isClicked = ref(false)

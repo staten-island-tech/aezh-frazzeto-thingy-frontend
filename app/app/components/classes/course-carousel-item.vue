@@ -99,7 +99,7 @@
             </div>
         </transition>
         <transition name="students-modal">
-            <ClassesStudentsModal v-if="viewingStudents" @close="viewingStudents = false"></ClassesStudentsModal>
+            <ClassesStudentsModal v-if="viewingStudents" @close="viewingStudents = false" :students="course.students"></ClassesStudentsModal>
         </transition>
         <transition name="class-code-modal">
             <div class="fixed left-[10%] top-[10%] h-[80vh] w-[80vw] bg-linear-to-tr from-sky-100 to-slate-100 rounded-3xl shadow-lg p-[2%] gap-4 justify-between flex-col flex py-[8%] md:py-[4%]"
@@ -123,8 +123,6 @@ import { Trash2, ArchiveDown2, User, ArrowDoorIn, Pen, Add, Screencast2, X } fro
 const prop = defineProps<{
     course: (any | null)
 }>()
-
-console.log(prop.course)
 
 const newDateM = ref<number | null>(null)
 const newDateD = ref<number | null>(null)
