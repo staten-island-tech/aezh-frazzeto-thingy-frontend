@@ -9,7 +9,7 @@
       <button
         @click="
           async () => {
-            await navigateTo('/catalog');
+            await navigateTo('/books');
           }
         "
         class="forum text-2xl bg-white shadow-sm hover:shadow-lg active:shadow-none px-[5%] text-black rounded-full w-[40%] transition-all duration-300 ease-in-out hover:bg-sky-400/20 active:bg-sky-400/60 hover:translate-y-[-2%] active:translate-y-[2%] h-[70%]"
@@ -49,7 +49,7 @@
         </div>
       </div>
     </div>
-    </div>
+  </div>
 </template>
 
 <script setup lang="ts">
